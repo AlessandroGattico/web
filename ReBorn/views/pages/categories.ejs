@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="elements">
+                <% categories.forEach(function (categoria){
+                    <div class="elemento" >
+                        <a href="/categoria" asp-route-campagnaId="@campagna.id">
+                            <div class="info-elemento nome">Nome: @campagna.nome</div>
+                            <div class="info-elemento dimensione">Dimensione: @campagna.size()</div>
+                            <div class="info-elemento campi">Numero campi: @campagna.campi.Count</div>
+                        </a>
+                    </div>
+                });%>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+/*-------------------
+     HEADER
+------------------ */
+
+.header-section {
+    height: 110px;
+    padding: 20px 45px;
+}
+
+.inner-header .logo {
+    float: left;
+}
+
+.inner-header .header-right {
+    float: right;
+    line-height: 30px;
+}
+
+.inner-header .header-right img {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.inner-header .header-right a {
+    display: inline-block;
+    position: relative;
+}
+
+.inner-header .header-right a img {
+    margin-right: 0;
+    margin-left: 4px;
+}
+
+.inner-header .header-right a span {
+    font-size: 11px;
+    color: #1e1e1e;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #D0D7DB;
+    background: #fff;
+    display: inline-block;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 600;
+    position: absolute;
+    left: -9px;
+    top: 14px;
+}
+
+.main-menu, .user-access, .header-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: large;
+}
+
+.inner-header {
+    float: right;
+    margin-right: 100px;
+}
+
+.inner-header a {
+    color: #1e1e1e;
+    font-size: 16px;
+    display: inline-block;
+    font-weight: 500;
+    position: relative;
+    line-height: 42px;
+}
+
+.inner-header a.in {
+    color: #838383;
+    margin-left: 15px;
+    position: relative;
+}
+
+.inner-header a.in::before {
+    position: absolute;
+    left: -13px;
+    top: 1px;
+    color: #1e1e1e;
+    content: "/";
+}
+
+
+/*-------------------
+     FOOTER
+------------------ */
+.footer-section {
+    background: #262626;
+    padding-bottom: 0;
+}
+
+.footer-widget {
+    margin-bottom: 40px;
+}
+
+.footer-widget .single-footer-widget {
+    margin-bottom: 30px;
+}
+
+.footer-widget .single-footer-widget h4 {
+    color: #fff;
+    font-size: 26px;
+    margin-bottom: 44px;
+}
+
+.footer-widget .single-footer-widget ul li {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    list-style: none;
+    line-height: 36px;
+    opacity: 0.5;
+}
+
+.social-links-warp {
+    background: #222121;
+    padding: 46px 0;
+    display: flex;
+}
+
+.social-links a {
+    margin-right: 188px;
+    display: inline-block;
+}
+
+.social-links a:last-child {
+    margin-right: 0;
+}
+
+.social-links a i {
+    font-size: 30px;
+    color: #d7d7d7;
+    float: left;
+    margin-right: 19px;
+    overflow: hidden;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    display: flex;
+}
+
+.social-links a span {
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #9f9fa0;
+    padding-top: 10px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}

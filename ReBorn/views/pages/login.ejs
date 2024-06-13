@@ -1,0 +1,43 @@
+<div class="row login-group">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="container custom-margin">
+            <div class="container mt-3">
+                <div class="row">
+                    <h2>Accedi</h2>
+                </div>
+                <form  action="/login/login" method="POST">
+                    <div class="row">
+                        <% if(typeof error !== 'undefined'){ %>
+                            <% if (error) { %>
+                                <div class="col alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <%= errorMessage %>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <div class="row email">
+                        <label>Email:</label>
+                        <input id="email" type="email" class="form-control" placeholder="Enter email"
+                               name="username"
+                               required>
+                    </div>
+                    <div class="row password">
+                        <label for="password">Password:</label>
+                        <input id="password" type="password" class="form-control" placeholder="Enter password"
+                               name="password" required>
+                    </div>
+                    <div class="row">
+                        <input type="submit" class="btn btn-success mt-3 mb-3" value="Login">
+                    </div>
+                </form>
+                <h5 class="center-horizontal">Non ti sei ancora registrato?&nbsp;<a href="/register">Clicca qui</a>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>

@@ -1,0 +1,71 @@
+<header class="header-section">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-2">
+                <div class="logo">
+                    <a href="/"><img src="/img/logo.png" alt="Logo"></a>
+                </div>
+            </div>
+            <div class="col-auto">
+                <a href="/" class="nav-element active">Home</a>
+            </div>
+            <div class="col-auto">
+                <div class="menu-item">
+                    <a href="/categories" class=" nav-element">Shop</a>
+                    <div class="sub-menu">
+                        <% categorie.forEach(function(categoria) { %>
+                            <a href="/categories/<%= categoria %>"><%= categoria %></a>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <a href="/vendi" class="nav-element">Vendi ora</a>
+            </div>
+            <div class="col flex-grow-1"></div>
+            <% if (typeof userLog === 'undefined') { %>
+                <div class="col-auto">
+                    <a href="/register" class="nav-element">Register</a>
+                </div>
+                <div class="col-auto">
+                    <a href="/login" class="nav-element">Sign in</a>
+                </div>
+            <% } else { %>
+                <div class="col-auto">
+                    <a href="/logout" class="nav-element">Sign out</a>
+                </div>
+                <div class="col-auto">
+                    <div class="header-icons">
+                        <a href="/profile">
+                            <img src="/img/icons/profile-icon.png" alt="Profile">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="header-icons">
+                        <a href="/cart">
+                            <img src="/img/icons/cart-icon.png" alt="Cart">
+                        </a>
+                    </div>
+                </div>
+            <% } %>
+
+        </div>
+    </div>
+</header>
+
+<br>
+
+<div class="header-info">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="header-search">
+                <form action="#" class="search-form">
+                    <input type="text" placeholder="Cerca...">
+                    <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
