@@ -14,7 +14,7 @@
                     <a href="/categories" class=" nav-element">Shop</a>
                     <div class="sub-menu">
                         <% categorie.forEach(function(categoria) { %>
-                            <a href="/categories/<%= categoria %>"><%= categoria %></a>
+                            <a href="/category/<%= categoria %>"><%= categoria %></a>
                         <% }); %>
                     </div>
                 </div>
@@ -41,13 +41,14 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <div class="header-icons">
-                        <a href="/cart">
-                            <img src="/img/icons/cart-icon.png" alt="Cart">
-                        </a>
-                    </div>
-                </div>
+                <% if(userLog.role === 'USER'){ %>
+                    <div class="col-auto">
+                        <div class="header-icons">
+                            <a href="/cart">
+                                <img src="/img/icons/cart-icon.png" alt="Cart">
+                            </a>
+                        </div>
+                    </div> <% } %>
             <% } %>
 
         </div>

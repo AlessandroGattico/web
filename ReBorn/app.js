@@ -18,8 +18,8 @@ const registerRouter = require('./routes/register');
 //const productRouter = require('./routes/product');
 //const cartRouter = require('./routes/cart');
 const layoutRouter = require('./routes/layout');
-//const categoriesRouter = require('./routes/categories');
-//const vendiRouter = require('./routes/vendi');
+const categsRouter = require('./routes/categories');
+const vendiRouter = require('./routes/vendi');
 //const categoriaRouter = require('./routes/categoria');
 
 //const adminDashboardRouter = require('./routes/admin/dashboard');
@@ -49,7 +49,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//implemento la logica di login
 passport.use(new LocalStrategy
 (function (username, password, done) {
 		user_dao.getUser(username, password).then(({user, check}) => {
@@ -67,7 +66,6 @@ passport.use(new LocalStrategy
 	}
 ));
 
-//questo non ho mai saputo per bene cosa sia perchè funziona così di base e non mi sono mai posto un vero e proprio problema nel capirlo in quanto non va modificato
 passport.serializeUser(function (user, done) {
 	done(null, user.email);
 });
@@ -78,12 +76,10 @@ passport.deserializeUser(function (email, done) {
 	});
 });
 
-//questo serve per la session della mia strategia di login
 app.use(session({
 	secret: 'SecretSession',
 	resave: false,
 	saveUninitialized: false,
-	//store: new SQLiteStore({db: 'session.db', dir: './'})//aggiunto
 }));
 
 app.use(flash());
@@ -99,6 +95,9 @@ app.use(passport.session());
 app.use('/', layoutRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/categories', categsRouter);
+app.use('/vendi', vendiRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

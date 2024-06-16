@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userDao = require('../models/user_dao.js');
-const cat = require('../models/categories.js');
+const cat = require('../models/categs.js');
 
 router.get('/', async function (req, res, next) {
 	try {

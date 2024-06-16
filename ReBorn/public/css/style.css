@@ -225,13 +225,13 @@ ol {
 
 .header-info {
     display: flex;
-    justify-content: center; /* Allinea al centro orizzontalmente */
-    align-items: center; /* Allinea al centro verticalmente */
-    padding: 10px 45px; /* Assicurati che il padding sia appropriato */
+    justify-content: center;
+    align-items: center;
+    padding: 10px 45px;
 }
 
 .header-search {
-    max-width: 400px; /* o la larghezza che preferisci */
+    max-width: 400px;
     width: 100%;
 }
 
@@ -243,11 +243,11 @@ ol {
 }
 
 .search-form input[type="text"] {
-    flex-grow: 1; /* Occupa tutto lo spazio disponibile */
+    flex-grow: 1;
 }
 
 .search-form button {
-    margin-left: 8px; /* Distanza tra l'input e il bottone */
+    margin-left: 8px;
 }
 
 
@@ -450,7 +450,7 @@ ol {
     background-color: #ddd;
 }
 
-.nav-element{
+.nav-element {
     font-size: 20px;
 }
 

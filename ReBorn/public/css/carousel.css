@@ -1,0 +1,20 @@
+.carousel {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item {
+    width: 100%;
+    display: none;
+    text-align: center;
+}
+
+.carousel-item.active {
+    display: block;
+}
+
+.slider {
+    width: 100%;
+    height: auto;
+}

@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-const cat = require('../models/categories.js');
+const cat = require('../models/categs.js');
 
 
 router.get('/', async function (req, res, next) {
@@ -58,7 +58,7 @@ router.get('/logout', function (req, res, next) {
 			return next(err);
 		} else {
 			userLog = undefined;
-			res.redirect('/login');
+			res.redirect('/');
 		}
 	});
 });

@@ -18,7 +18,7 @@ function moveSlide(step) {
 function startSlideShow() {
 	slideInterval = setInterval(() => {
 		moveSlide(1);
-	}, 2000); // Change slides every 3000 milliseconds (3 seconds)
+	}, 3000); // Change slides every 3000 milliseconds (3 seconds)
 }
 
 function stopSlideShow() {
@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	showSlide(currentSlide);
 	startSlideShow();
 
-	// Optional: Stops the slideshow when user hovers over the carousel
 	document.querySelector('.carousel').addEventListener('mouseover', stopSlideShow);
 	document.querySelector('.carousel').addEventListener('mouseout', startSlideShow);
 });
