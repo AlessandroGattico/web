@@ -1,0 +1,25 @@
+.card-img-top {
+    height: 200px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.card:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-container-prod {
+    height: 200px;
+    width: 100px;
+    overflow: hidden; /* Nasconde le parti dell'immagine che escono dal contenitore */
+    display: flex;     /* Utilizza Flexbox per centrare l'immagine */
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center;    /* Centra verticalmente */
+}
+
+.image-container-prod img {
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}

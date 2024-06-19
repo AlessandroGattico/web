@@ -14,3 +14,35 @@ exports.getCategorieFromDb = function () {
 		});
 	});
 }
+
+exports.getCategoryStats = function () {
+	return new Promise((resolve, reject) => {
+		const sql = `
+      SELECT
+        c.id,
+        c.name,
+        COUNT(DISTINCT p.id) AS num_oggetti,
+        COUNT(DISTINCT a.product_id) AS num_acquistati,
+        c.insert_time 
+      FROM categories c
+      LEFT JOIN product p ON c.name = p.categoria
+      LEFT JOIN acquistati a ON p.id = a.product_id
+      GROUP BY c.id, c.name, c.insert_time 
+    `;
+
+		db.all(sql, [], (err, rows) => {
+			if (err) {
+				reject(err);
+			} else {
+				const categories = rows.map(row => ({
+					id: row.id,
+					nome: row.name,
+					oggetti: row.num_oggetti,
+					acquistati: row.num_acquistati,
+					time: row.insert_time
+				}));
+				resolve(categories);
+			}
+		});
+	});
+};

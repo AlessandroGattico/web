@@ -1,34 +1,24 @@
-let currentSlide = 0;
-const slides = document.getElementsByClassName('carousel-item');
-const totalSlides = slides.length;
-let slideInterval;
+document.addEventListener('DOMContentLoaded', function () {
+	const carouselItems = document.querySelectorAll('.carousel-item');
+	let currentIndex = 0;
 
-function showSlide(index) {
-	if (slides[currentSlide]) {
-		slides[currentSlide].classList.remove('active');
+	function updateCarousel(newIndex) {
+		carouselItems[currentIndex].classList.remove('active');
+		carouselItems[newIndex].classList.add('active');
+		currentIndex = newIndex;
 	}
-	currentSlide = (index + totalSlides) % totalSlides;
-	slides[currentSlide].classList.add('active');
-}
 
-function moveSlide(step) {
-	showSlide(currentSlide + step);
-}
+	document.querySelector('.carousel-control-prev').addEventListener('click', function (e) {
+		e.preventDefault();
+		let newIndex = currentIndex - 1;
+		if (newIndex < 0) newIndex = carouselItems.length - 1;
+		updateCarousel(newIndex);
+	});
 
-function startSlideShow() {
-	slideInterval = setInterval(() => {
-		moveSlide(1);
-	}, 3000); // Change slides every 3000 milliseconds (3 seconds)
-}
-
-function stopSlideShow() {
-	clearInterval(slideInterval);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-	showSlide(currentSlide);
-	startSlideShow();
-
-	document.querySelector('.carousel').addEventListener('mouseover', stopSlideShow);
-	document.querySelector('.carousel').addEventListener('mouseout', startSlideShow);
+	document.querySelector('.carousel-control-next').addEventListener('click', function (e) {
+		e.preventDefault();
+		let newIndex = currentIndex + 1;
+		if (newIndex >= carouselItems.length) newIndex = 0;
+		updateCarousel(newIndex);
+	});
 });

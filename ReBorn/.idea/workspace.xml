@@ -4,19 +4,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d9485da-8b87-4e3c-9ac8-942b21915b8f" name="Changes" comment="sistemare login">
-      <change afterPath="$PROJECT_DIR$/public/css/carousel.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/categories.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/categories.js" afterDir="false" />
+    <list default="true" id="5d9485da-8b87-4e3c-9ac8-942b21915b8f" name="Changes" comment="aggiunta categories e vendi">
+      <change afterPath="$PROJECT_DIR$/models/admin/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/products.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/vendi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/cart.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/categoria.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/product.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/admin/dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/admin/scripts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/admin/categories.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/admin/dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/admin/products.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/admin/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/cart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/categoria.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/checkout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/contact.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/product.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/layouts/layoutAdmin.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/layouts/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/pages/contact.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/pages/preferiti.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/pages/search.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database" beforeDir="false" afterPath="$PROJECT_DIR$/database" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/categs.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/categs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user_dao.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user_dao.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/carousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/carousel.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/slider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/categories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/vendi.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/vendi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/layouts/layout.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/layout.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/admin/categories.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/admin/categories.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/admin/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/admin/dashboard.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/admin/products.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/admin/products.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/admin/profile.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/admin/users.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/admin/users.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/cart.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/cart.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/categoria.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/categoria.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/pages/categories.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/categories.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/checkout.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/checkout.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/login.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/product.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/product.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/profile.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/profile.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/register.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pages/vendi.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/vendi.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/footer.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/footer.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/headerHadmin.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/headerAdmin.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +78,7 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -56,12 +107,13 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Node.js.bin/www.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;22.2.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.14.2&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/alessandrogattico/Desktop/metWeb/ReBorn/public/js&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/alessandrogattico/Desktop/metWeb/ReBorn/public/js/admin&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -70,25 +122,27 @@
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/js/admin" />
       <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$/public/img" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/public/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/js/admin" />
       <recent name="$PROJECT_DIR$/views/pages" />
       <recent name="$PROJECT_DIR$/views" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Node.js.bin/www">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -130,7 +184,21 @@
       <workItem from="1718264289186" duration="2075000" />
       <workItem from="1718266608762" duration="40000" />
       <workItem from="1718521751278" duration="2278000" />
-      <workItem from="1718524313744" duration="337000" />
+      <workItem from="1718524313744" duration="1293000" />
+      <workItem from="1718527590028" duration="4125000" />
+      <workItem from="1718540147977" duration="3872000" />
+      <workItem from="1718544875870" duration="3618000" />
+      <workItem from="1718553791869" duration="2111000" />
+      <workItem from="1718562688903" duration="5315000" />
+      <workItem from="1718607807486" duration="9889000" />
+      <workItem from="1718621414761" duration="16326000" />
+      <workItem from="1718695603163" duration="2049000" />
+      <workItem from="1718699097806" duration="5252000" />
+      <workItem from="1718709650475" duration="14984000" />
+      <workItem from="1718737044803" duration="4627000" />
+      <workItem from="1718780588718" duration="307000" />
+      <workItem from="1718780909331" duration="9590000" />
+      <workItem from="1718796119858" duration="4501000" />
     </task>
     <task id="LOCAL-00001" summary="sistemare login">
       <option name="closed" value="true" />
@@ -140,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718264680765</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="aggiunta categories e vendi">
+      <option name="closed" value="true" />
+      <created>1718525603430</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718525603430</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,24 +224,25 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sistemare login" />
-    <option name="LAST_COMMIT_MESSAGE" value="sistemare login" />
+    <MESSAGE value="aggiunta categories e vendi" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunta categories e vendi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/register.js</url>
-          <line>33</line>
+          <line>31</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/register.js</url>
-          <line>35</line>
+          <line>33</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/register.js</url>
-          <line>36</line>
+          <line>34</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

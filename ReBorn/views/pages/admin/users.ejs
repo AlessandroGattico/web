@@ -1,0 +1,70 @@
+<% if (error) { %>
+    <script>
+		window.onload = () => {
+			alert("<%= errorMessage %>");
+		};
+    </script>
+<% } %>
+
+<div class="row">
+    <div class="col-md-10 mx-auto">
+
+        <h4 class="text-center mb-3 mt-3">Utenti</h4>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Utenti
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Email</th>
+                        <th>Ruolo</th>
+                        <th>Insert_time</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Email</th>
+                        <th>Ruolo</th>
+                        <th>Insert_time</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <% if(users) { %>
+                        <% users.forEach(function (user) { %>
+                            <tr>
+                                <td>
+                                    <%= user.id %>
+                                </td>
+                                <td>
+                                    <%= user.nome %>
+                                </td>
+                                <td>
+                                    <%= user.cognome %>
+                                </td>
+                                <td>
+                                    <%= user.mail %>
+                                </td>
+                                <td>
+                                    <%= user.role %>
+                                </td>
+                                <td>
+                                    <%= user.time %>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

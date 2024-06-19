@@ -8,7 +8,7 @@ exports.insertNewUser = function (utente) {
 				utente.password = hash;
 
 				const role = 'USER';
-				const sql = `INSERT INTO user (nome, cognome, mail, password, role)
+				const sql = `INSERT INTO utenti (nome, cognome, mail, password, role)
                              VALUES (?, ?, ?, ?, ?);`;
 
 				db.run(sql, [utente.nome, utente.cognome, utente.username, utente.password, role], function (err) {
@@ -41,7 +41,7 @@ exports.insertNewUser = function (utente) {
 
 exports.getUser = function (email, password) {
 	return new Promise((resolve, reject) => {
-		let sql = 'SELECT * FROM user WHERE mail = ?';
+		let sql = 'SELECT * FROM utenti WHERE mail = ?';
 
 		db.get(sql, [email], (err, row) => {
 			if (err) {
@@ -50,6 +50,7 @@ exports.getUser = function (email, password) {
 				resolve({error: 'User not found.'});
 			} else {
 				const user = {
+					id: row.id,
 					mail: row.mail,
 					password: row.password,
 					nome: row.nome,
@@ -68,9 +69,32 @@ exports.getUser = function (email, password) {
 	});
 };
 
+
+exports.getUsers = function () {
+	return new Promise((resolve, reject) => {
+		const sql = 'SELECT id, nome, cognome, mail, role, insert_time FROM utenti';
+
+		db.all(sql, [], (err, rows) => {
+			if (err) {
+				reject(err);
+			} else {
+				const users = rows.map(row => ({
+					id: row.id,
+					nome: row.nome,
+					cognome: row.cognome,
+					mail: row.mail,
+					role: row.role,
+					time: row.insert_time
+				}));
+				resolve(users);
+			}
+		});
+	});
+};
+
 exports.getUserById = function (id) {
 	return new Promise((resolve, reject) => {
-		const query = 'SELECT * FROM user WHERE id = ?';
+		const query = 'SELECT * FROM utenti WHERE id = ?';
 		db.get(query, [id], (error, row) => {
 			if (error) {
 				reject(error);
@@ -85,7 +109,7 @@ exports.getUserById = function (id) {
 exports.getCheckUser = function (mail) {
 	return new Promise((resolve, reject) => {
 		let query = `SELECT *
-                     FROM user
+                     FROM utenti
                      WHERE mail = ?;`;
 
 		db.run(query, [mail.username], (error, data) => {
@@ -109,7 +133,7 @@ exports.insertUser = function (user) {
 	return new Promise((resolve, reject) => {
 		user.psw = bcrypt.hashSync(user.psw, 10);
 
-		let query = `INSERT INTO user (nome, cognome, mail, password, role)
+		let query = `INSERT INTO utenti (nome, cognome, mail, password, role)
                      VALUES (?, ?, ?, ?, ?)`;
 
 		db.run(query, [user.nome, user.cognome, user.mail, user.psw, 'USER'], (error) => {
@@ -124,7 +148,7 @@ exports.insertUser = function (user) {
 
 exports.updateUser = function (newUser) {
 	return new Promise((resolve, reject) => {
-		let query = `UPDATE user
+		let query = `UPDATE utenti
                      SET mail    = ?,
                          nome    = ?,
                          cognome = ?
@@ -145,7 +169,7 @@ exports.ctrlOldPassword = function (password) {
 		password.oldPassword = bcrypt.hashSync(password.oldPassword, 10);
 
 		let query = `SELECT *
-                     FROM user
+                     FROM utenti
                      WHERE password = ?
                        AND mail = ?`;
 
@@ -164,15 +188,15 @@ exports.ctrlOldPassword = function (password) {
 
 exports.controlUserExist = function (email) {
 	return new Promise((resolve, reject) => {
-		const sql = 'SELECT * FROM user WHERE mail = ?';
+		const sql = 'SELECT * FROM utenti WHERE mail = ?';
 
-		db.get(sql, [email.email], (err, row) => {//email.(qualcosa) oppure (qualcosa).email
+		db.get(sql, [email], (err, row) => {
 			if (err) {
 				reject(err);
 			} else if (row === undefined) {
-				resolve(true); // Restituisce true se l'utente esiste, altrimenti false
-			} else {
 				resolve(false);
+			} else {
+				resolve(true);
 			}
 		});
 	});
@@ -182,7 +206,7 @@ exports.updatePassword = function (newPassword) {
 	return new Promise((resolve, reject) => {
 		newPassword = bcrypt.hashSync(newPassword, 10);
 
-		let query = `UPDATE user
+		let query = `UPDATE utenti
                      SET password = ?
                      WHERE mail = ?`;
 
@@ -198,21 +222,58 @@ exports.updatePassword = function (newPassword) {
 
 exports.getUserByEmail = function (email) {
 	return new Promise((resolve, reject) => {
-		let sql = 'SELECT * FROM user WHERE mail = ?';
+		const sql = 'SELECT * FROM utenti WHERE mail = ?';
 
 		db.get(sql, [email], (err, row) => {
-			if (err)
+			if (err) {
 				reject(err);
-			else if (row === undefined)
-				resolve({error: 'User not found.'});
-			else {
-				const user = {
-					email: row.email,
-					password: row.password,
+			} else {
+				resolve(row);
+			}
+		});
+	});
+};
+
+exports.getUserAddress = function (userId) {
+	return new Promise((resolve, reject) => {
+		const sql = 'SELECT * FROM indirizzi WHERE user_id = ?';
+
+		db.get(sql, [userId], (err, row) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(row);
+			}
+		});
+	});
+};
+
+
+exports.getAllProductsAdmin = function () {
+	return new Promise((resolve, reject) => {
+		const sql = `
+      SELECT 
+        p.id, p.nome, p.descrizione, p.prezzo, p.available, p.insert_time, p.categoria,
+        u.mail AS owner_email 
+      FROM product p
+      JOIN utenti u ON p.owner = u.id
+    `;
+
+		db.all(sql, [], (err, rows) => {
+			if (err) {
+				reject(err);
+			} else {
+				const products = rows.map(row => ({
+					id: row.id,
 					nome: row.nome,
-					cognome: row.cognome,
-				}
-				resolve(user);
+					descrizione: row.descrizione,
+					prezzo: row.prezzo,
+					available: row.available,
+					proprietario: row.owner_email,
+					categoria: row.categoria,
+					time: row.insert_time
+				}));
+				resolve(products);
 			}
 		});
 	});

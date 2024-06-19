@@ -1,3 +1,12 @@
+<% if (errorMessage.length > 0) { %>
+    <div class="alert alert-danger">
+        <% errorMessage.forEach(function(error) { %>
+            <%= error %><br>
+        <% }); %>
+    </div>
+<% } %>
+
+
 <div class="row login-group">
     <div class="col-md-4"></div>
     <div class="col-md-4">
@@ -21,7 +30,7 @@
                     </div>
                     <div class="row email">
                         <label>Email:</label>
-                        <input id="email" type="email" class="form-control" placeholder="Enter email"
+                        <input id="username" type="email" class="form-control" placeholder="Enter email"
                                name="username"
                                required>
                     </div>

@@ -1,25 +1,28 @@
+<% if (errorMessage.length > 0) { %>
+    <div class="alert alert-danger">
+        <% errorMessage.forEach(function(error) { %>
+            <%= error %><br>
+        <% }); %>
+    </div>
+<% } %>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
         </div>
-        
+
         <div class="col-md-8">
-            <% if (!categorie.isEmpty()) { %>
-                <div class="elements">
-                    <% categorie.forEach(function(categoria) { %>
-                        <div class="elemento">
-                            <a href="/categoria/<%= categoria %>"><%= categoria %>
-                                <div class="info-elemento nome">Nome:
-                                    <% categoria %>
-                                </div>
-                            </a>
-                        </div>
-                    <% }); %>
-                </div>
-            <% } %>
-            <% else { %>
-                <h3>Non sono presenti categorie al momento</h3>
-            <% } %>
+            <div class="elements">
+                <% categorie.forEach(function(categoria) { %>
+                    <div class="elemento">
+                        <a href="/categoria/<%= categoria %>">
+                            <div class="info-elemento nome">
+                                <%= categoria %>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
         </div>
 
         <div class="col-md-2">

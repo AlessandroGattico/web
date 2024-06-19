@@ -252,8 +252,9 @@ ol {
 
 
 .header-section {
-    height: 110px;
-    padding: 20px 45px;
+    height: 120px;
+    padding: 20px;
+    background-color: #f4f4f4;
 }
 
 .inner-header .logo {
@@ -896,9 +897,7 @@ ol {
     margin-bottom: 80px;
 }
 
-.email, .password {
-    margin-top: 20px;
-}
+
 
 /*---------------------
   Register Section
@@ -946,7 +945,7 @@ ol {
 -----------------------*/
 
 .footer-section {
-    background: #262626;
+    background: #333333;
     padding-bottom: 0;
 }
 

@@ -1,0 +1,83 @@
+<% if (errorMessage.length > 0) { %>
+    <div class="alert alert-danger">
+        <% errorMessage.forEach(function(error) { %>
+            <%= error %><br>
+        <% }); %>
+    </div>
+<% } %>
+
+
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <div class="card mb-4">
+            <h4 class="text-center mb-3 mt-3">Prodotti</h4>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Prodotti
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Descrizione</th>
+                            <th>Prezzo</th>
+                            <th>Proprietario</th>
+                            <th>Disponibilità</th>
+                            <th>Insert_time</th>
+
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>id</th>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Descrizione</th>
+                            <th>Prezzo</th>
+                            <th>Proprietario</th>
+                            <th>Disponibilità</th>
+                            <th>Insert_time</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <% if(prodotti) { %>
+                            <% prodotti.forEach(function (product) { %>
+                                <tr>
+                                    <td>
+                                        <%= product.id %>
+                                    </td>
+                                    <td>
+                                        <%= product.nome %>
+                                    </td>
+                                    <td>
+                                        <%= product.categoria %>
+                                    </td>
+                                    <td>
+                                        <%= product.descrizione %>
+                                    </td>
+                                    <td>
+                                        <%= product.prezzo %>
+                                    </td>
+                                    <td>
+                                        <%= product.proprietario %>
+                                    </td>
+                                    <td>
+                                        <%= product.available %>
+                                    </td>
+                                    <td>
+                                        <%= product.time %>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

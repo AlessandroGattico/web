@@ -1,0 +1,100 @@
+<h2>Dashboard Amministratore</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Utenti registrati (ultimi 30 giorni)</h3>
+            <canvas id="utentiRegistratiChart"></canvas>
+        </div>
+        <div class="col-md-4">
+            <h3>Prodotti in vendita (ultimi 30 giorni)</h3>
+            <select id="categoriaVenduti">
+                <option value="">Tutte le categorie</option>
+                <% categorie.forEach(function(categoria) { %>
+                    <option value="<%= categoria %>"><%= categoria %></option>
+                <% }); %>
+            </select>
+            <canvas id="prodottiVendutiChart"></canvas>
+        </div>
+        <div class="col-md-4">
+            <h3>Prodotti acquistati (ultimi 30 giorni)</h3>
+            <select id="categoriaAcquistati">
+                <option value="">Tutte le categorie</option>
+                <% categorie.forEach(function (categoria) { %>
+                    <option value="<%= categoria %>"><%= categoria %></option>
+                <% }); %>
+            </select>
+            <canvas id="prodottiAcquistatiChart"></canvas>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	function createChart(canvasId, chartData) {
+		return new Chart(document.getElementById(canvasId), {
+			type: 'line',
+			data: chartData,
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true,
+						precision: 0
+					},
+					x: {
+						type: 'time',
+						time: {
+							unit: 'day'
+						}
+					}
+				}
+			}
+		});
+	}
+
+	function updateChartData(chart, newData) { /* ... */
+	}
+
+	const utentiRegistratiChart = createChart('utentiRegistratiChart', {
+		labels: JSON.stringify(uesers.labels),
+		datasets: [{
+			label: 'Utenti registrati',
+			data: JSON.stringify(users.data),
+			fill: true,
+			borderColor: 'rgb(75, 192, 192)',
+			tension: 0.1
+		}]
+	});
+
+	const prodottiVendutiChart = createChart('prodottiVendutiChart', {
+		labels: JSON.stringify(listed.labels),
+		datasets: JSON.stringify(listed.datasets)
+	});
+
+	const prodottiAcquistatiChart = createChart('prodottiAcquistatiChart', {
+		labels: JSON.stringify(products.labels),
+		datasets: JSON.stringify(products.datasets)
+	});
+
+	document.getElementById('categoriaVenduti').addEventListener('change', async (event) => {
+		const selectedCategory = event.target.value;
+		try {
+			const response = await fetch(`/admin/prodotti-venduti?categoria=${selectedCategory}`);
+			const newData = await response.json();
+			updateChartData(prodottiVendutiChart, newData);
+		} catch (error) {
+			console.error('Errore durante il recupero dei dati:', error);
+
+		}
+	});
+
+	document.getElementById('categoriaAcquistati').addEventListener('change', async (event) => {
+		const selectedCategory = event.target.value;
+		try {
+			const response = await fetch(`/admin/prodotti-acquistati?categoria=${selectedCategory}`);
+			const newData = await response.json();
+			updateChartData(prodottiAcquistatiChart, newData);
+		} catch (error) {
+			console.error('Errore durante il recupero dei dati:', error);
+		}
+	});
+</script>

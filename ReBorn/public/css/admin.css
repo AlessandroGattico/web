@@ -12864,3 +12864,86 @@ body {
     font-size: 0.75rem;
     border-radius: 0.375rem !important;
 }
+
+
+
+.footer-section {
+    background: #262626;
+    padding-bottom: 0;
+}
+
+.footer-widget {
+    margin-bottom: 40px;
+}
+
+.footer-widget .single-footer-widget {
+    margin-bottom: 30px;
+}
+
+.footer-widget .single-footer-widget h4 {
+    color: #fff;
+    font-size: 26px;
+    margin-bottom: 44px;
+}
+
+.footer-widget .single-footer-widget ul li {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    list-style: none;
+    line-height: 36px;
+    opacity: 0.5;
+}
+
+.social-links-warp {
+    background: #222121;
+    padding: 46px 0;
+    display: flex;
+}
+
+.social-links a {
+    margin-right: 188px;
+    display: inline-block;
+}
+
+.social-links a:last-child {
+    margin-right: 0;
+}
+
+.social-links a i {
+    font-size: 30px;
+    color: #d7d7d7;
+    float: left;
+    margin-right: 19px;
+    overflow: hidden;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    display: flex;
+}
+
+.social-links a span {
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #9f9fa0;
+    padding-top: 10px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.social-links a.instagram:hover i {
+    color: #2F5D84;
+}
+
+.social-links a.facebook:hover i {
+    color: #39599F;
+}
+
+.social-links a.youtube:hover i {
+    color: #D12227;
+}
+
+.social-links a:hover span {
+    color: #fff;
+}

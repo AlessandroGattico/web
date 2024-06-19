@@ -10,22 +10,24 @@ let requirejs = require('requirejs');
 const user_dao = require('./models/user_dao');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
+const bcrypt = require('bcrypt');
 
 
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
-//const checkoutRouter = require('./routes/checkout');
-//const productRouter = require('./routes/product');
-//const cartRouter = require('./routes/cart');
-const layoutRouter = require('./routes/layout');
+const checkoutRouter = require('./routes/checkout');
+const productRouter = require('./routes/product');
+const cartRouter = require('./routes/cart');
+const indexRouter = require('./routes/index');
 const categsRouter = require('./routes/categories');
 const vendiRouter = require('./routes/vendi');
-//const categoriaRouter = require('./routes/categoria');
+const categoriaRouter = require('./routes/categoria');
+const contactRouter = require('./routes/contact');
 
-//const adminDashboardRouter = require('./routes/admin/dashboard');
-//const adminProductsRouter = require('./routes/admin/products');
-//const adminUsersRouter = require('./routes/admin/users');
-//const adminCategoriesRouter = require('./routes/admin/categories');
+const adminDashboardRouter = require('./routes/admin/dashboard');
+const adminProductsRouter = require('./routes/admin/products');
+const adminUsersRouter = require('./routes/admin/users');
+const adminCategoriesRouter = require('./routes/admin/categories');
 
 const app = express();
 /*
@@ -49,55 +51,77 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-passport.use(new LocalStrategy
-(function (username, password, done) {
-		user_dao.getUser(username, password).then(({user, check}) => {
-			if (!user && !check) {
-				return done(null, false, {message: 'Email e Password non corretti!'});
-			}
-			if (!user) {
-				return done(null, false, {message: 'Email non corretta!'});
-			}
-			if (!check) {
-				return done(null, false, {message: 'Password non corretta!'});
-			}
-			return done(null, user);
-		});
-	}
-));
-
-passport.serializeUser(function (user, done) {
-	done(null, user.email);
-});
-
-passport.deserializeUser(function (email, done) {
-	user_dao.getUserByEmail(email).then(user => {
-		done(null, user);
-	});
-});
-
 app.use(session({
-	secret: 'SecretSession',
+	secret: 'il_tuo_segreto',
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: false
 }));
 
 app.use(flash());
 
-app.use((req, res, next) => {
-	res.locals.messages = req.flash();
-	next();
-});
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', layoutRouter);
+passport.use(new LocalStrategy(
+	{usernameField: 'username'},
+	async (email, password, done) => {
+		console.log("Tentativo di login con email:", email);
+
+		try {
+			const user = await user_dao.getUserByEmail(email);
+			console.log("Utente trovato:", user);
+
+			if (!user) {
+				return done(null, false, {message: 'Utente non trovato'});
+			}
+
+			const isMatch = await bcrypt.compare(password, user.password);
+			console.log("Password corretta:", isMatch);
+
+			if (!isMatch) {
+				return done(null, false, {message: 'Password errata'});
+			}
+
+			user.password = "";
+			return done(null, user);
+		} catch (err) {
+			console.error("Errore durante l'autenticazione:", err);
+			return done(err);
+		}
+	}
+));
+
+passport.serializeUser((user, done) => {
+	done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+	try {
+		const user = await user_dao.getUserById(id);
+		if (!user) {
+			return done(new Error('Utente non trovato'));
+		}
+		done(null, user);
+	} catch (err) {
+		done(err);
+	}
+});
+
+app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/categories', categsRouter);
+app.use('/categoria', categoriaRouter);
 app.use('/vendi', vendiRouter);
+app.use('/product', productRouter);
+app.use('/cart', cartRouter);
+app.use('/checkout', checkoutRouter);
+app.use('/contact', contactRouter);
 
+app.use('/admin/dashboard', adminDashboardRouter);
+app.use('/admin/users', adminUsersRouter);
+app.use('/admin/categories', adminCategoriesRouter);
+app.use('/admin/products', adminProductsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,73 +1,43 @@
-<section class="page-add">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="page-breadcrumb">
-                    <h2>Shirts<span>.</span></h2>
-                    <a href="#">Home</a>
-                    <a href="#">Dresses</a>
-                    <a class="active" href="#">Night Dresses</a>
-                </div>
-            </div>
-        </div>
+<% if (errorMessage.length > 0) { %>
+    <div class="alert alert-danger">
+        <% errorMessage.forEach(function(error) { %>
+            <%= error %><br>
+        <% }); %>
     </div>
-</section>
+<% } %>
 
 <section class="product-page">
     <div class="container">
-        <div class="product-control">
-            <a href="#">Previous</a>
-            <a href="#">Next</a>
-        </div>
         <div class="row">
             <div class="col-lg-6">
-                <div class="product-slider owl-carousel">
+                <div class="product-slider owl-carousel image-container">
                     <div class="product-img">
                         <figure>
-                            <img src="img/product/product-1.jpg" alt="">
-                            <div class="p-status">new</div>
+                            <img src="<%= product.photo %>" alt="<%= product.nome %>">
                         </figure>
                     </div>
-                    <div class="product-img">
-                        <figure>
-                            <img src="img/product/product-1.jpg" alt="">
-                            <div class="p-status">new</div>
-                        </figure>
-                    </div>
+                    <% if (product.images) { %>
+                        <% product.images.forEach(function (image) { %>
+                            <div class="product-img">
+                                <figure>
+                                    <img src="<%= image %>" alt="">
+                                </figure>
+                            </div>
+                        <% }); %>
+                    <% } %>
                 </div>
 
             </div>
             <div class="col-lg-6">
                 <div class="product-content">
-                    <h2>Dotted Blue Shirt</h2>
-                    <div class="pc-meta">
-                        <h5>$22.90</h5>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                        viverra maecenas accumsan lacus vel facilisis.</p>
+                    <h2><%= product.nome %></h2>
+                    <h5>€ <%= product.prezzo %></h5>
+                    <p><%= product.descrizione %></p>
                     <ul class="tags">
-                        <li><span>Category :</span> Men’s Wear</li>
-                        <li><span>Tags :</span> man, shirt, dotted, elegant, cool</li>
+                        <li><span>Categoria: </span><%= product.categoria %></li>
                     </ul>
-                    <div class="product-quantity">
-                        <div class="pro-qty">
-                            <input type="text" value="1">
-                        </div>
-                    </div>
-                    <a href="#" class="primary-btn pc-btn">Add to cart</a>
-                    <ul class="p-info">
-                        <li>Product Information</li>
-                        <li>Reviews</li>
-                        <li>Product Care</li>
-                    </ul>
+                    <a href="/favourites/add/<%= product.id %>" class="primary-btn pc-btn">Add to favourites</a>
+                    <a href="/cart/add/<%= product.id %>" class="primary-btn pc-btn">Add to cart</a>
                 </div>
             </div>
         </div>
@@ -77,61 +47,23 @@
 <section class="related-product spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="section-title">
-                    <h2>Related Products</h2>
-                </div>
-            </div>
+            <% randomProducts.forEach((product, index) => { %>
+                <a href="/product/<%= product.id %>" class="col-md-3 mb-4 text-decoration-none">
+                    <div class="card h-100">
+                        <img src="<%= product.photo %>" class="card-img-top product-display" alt="<%= product.nome %>">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title"><%= product.nome %></h5>
+                            <p class="card-text flex-grow-1"><%= product.descrizione.substring(0, 100) %>...</p>
+                            <p class="card-text">Prezzo: €<%= product.prezzo %></p>
+                        </div>
+                    </div>
+                </a>
+
+                <% if ((index + 1) % 4 === 0) { %>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-product-item">
-                    <figure>
-                        <a href="#"><img src="img/products/img-1.jpg" alt=""></a>
-                        <div class="p-status">new</div>
-                    </figure>
-                    <div class="product-text">
-                        <h6>Green Dress with details</h6>
-                        <p>$22.90</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-product-item">
-                    <figure>
-                        <a href="#"><img src="img/products/img-2.jpg" alt=""></a>
-                        <div class="p-status sale">sale</div>
-                    </figure>
-                    <div class="product-text">
-                        <h6>Yellow Maxi Dress</h6>
-                        <p>$25.90</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-product-item">
-                    <figure>
-                        <a href="#"><img src="img/products/img-3.jpg" alt=""></a>
-                        <div class="p-status">new</div>
-                    </figure>
-                    <div class="product-text">
-                        <h6>One piece bodysuit</h6>
-                        <p>$19.90</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-product-item">
-                    <figure>
-                        <a href="#"><img src="img/products/img-4.jpg" alt=""></a>
-                        <div class="p-status popular">popular</div>
-                    </figure>
-                    <div class="product-text">
-                        <h6>Blue Dress with details</h6>
-                        <p>$35.50</p>
-                    </div>
-                </div>
-            </div>
+            <% } %>
+            <% }); %>
         </div>
     </div>
 </section>

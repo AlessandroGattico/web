@@ -1,3 +1,11 @@
+<% if (errorMessage.length > 0) { %>
+    <div class="alert alert-danger">
+        <% errorMessage.forEach(function(error) { %>
+            <%= error %><br>
+        <% }); %>
+    </div>
+<% } %>
+
 <div class="container custom-margin register-form">
     <form action="/register/register" method="POST">
         <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
@@ -16,7 +24,7 @@
                 <div class="mb-3 mt-3">
                     <label for="username">Email:</label>
                     <input type="email" id="username" name="username" placeholder="Inserisci la tua mail"
-                           required>
+                           required class="form-control">
                 </div>
             </div>
         </div>
@@ -24,15 +32,14 @@
             <div class="col">
                 <div class="mb-3 mt-3">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Nome" required>
+                    <input type="text" id="nome" name="nome" placeholder="Nome" required class="form-control">
                 </div>
             </div>
-        </div>
-        <div class="row">
+
             <div class="col">
                 <div class="mb-3 mt-3">
                     <label for="cognome">Cognome:</label>
-                    <input type="text" id="cognome" name="cognome" placeholder="Cognome" required>
+                    <input type="text" id="cognome" name="cognome" placeholder="Cognome" required class="form-control">
                 </div>
             </div>
         </div>
@@ -40,16 +47,16 @@
             <div class="col">
                 <div class="mb-3 mt-3">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required
+                           class="form-control">
                 </div>
             </div>
-        </div>
-        <div class="row">
+
             <div class="col">
                 <div class="mb-3 mt-3">
                     <label for="confirmPassword">Ripeti Password:</label>
                     <input type="password" id="confirmPassword" name="confirmPassword"
-                           placeholder="Ripeti password" required>
+                           placeholder="Ripeti password" required class="form-control">
                 </div>
             </div>
         </div>
@@ -57,15 +64,15 @@
             <div class="col">
                 <div class="mb-3 mt-3">
                     <label for="paese">Nazione:</label>
-                    <input type="text" id="paese" name="paese" placeholder="Nazione" required>
+                    <input type="text" id="paese" name="paese" placeholder="Nazione" required class="form-control">
                 </div>
             </div>
-        </div>
-        <div class="row">
+
             <div class="col">
                 <div class="mb-3 mt-3">
                     <label for="provincia">Provincia:</label>
-                    <input type="text" id="provincia" name="provincia" placeholder="Provincia" required>
+                    <input type="text" id="provincia" name="provincia" placeholder="Provincia" required
+                           class="form-control">
                 </div>
             </div>
         </div>
@@ -74,27 +81,27 @@
                 <div class="mb-3 mt-3">
                     <label for="citta">Città:</label>
                     <input type="text" id="citta" name="citta" placeholder="Citta/Paese di residenza"
-                           required>
+                           required class="form-control">
                 </div>
             </div>
-        </div>
-        <div class="row">
+
             <div class="col">
                 <div class="mb-3 mt-3">
                     <label for="zipcode">CAP:</label>
-                    <input type="text" id="zipcode" name="zipcode" placeholder="Cap" required>
+                    <input type="number" id="zipcode" name="zipcode" placeholder="Cap" required class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row email">
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <label for="via">Via:</label>
+                    <input type="text" id="via" name="via" placeholder="Indirizzo di residenza" required
+                           class="form-control">
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="mb-3 mt-3">
-                    <label for="via">Via:</label>
-                    <input type="text" id="via" name="via" placeholder="Indirizzo di residenza" required>
-                </div>
-            </div>
-        </div>
-        <div class="row ">
             <div class="col">
                 <label class="mb-3 mt-3" for="accettazione">Trattamento dei dati personali:</label>
                 <div class="form-check">
@@ -111,6 +118,7 @@
                 </button>
             </div>
         </div>
+
     </form>
     <h5 class="center-horizontal">Sei già registrato? <a href="/login">Vai al login!</a></h5>
 </div>

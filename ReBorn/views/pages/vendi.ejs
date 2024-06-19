@@ -1,6 +1,6 @@
 <div>
     <h1>Metti in Vendita il Tuo Oggetto</h1>
-    <form action="/sell" method="post" enctype="multipart/form-data">
+    <form action="/vendi/vendi" method="post" enctype="multipart/form-data">
         <div>
             <label for="name">Nome:</label>
             <input type="text" id="name" name="name" required>
@@ -11,17 +11,26 @@
         </div>
         <div>
             <label for="price">Prezzo:</label>
-            <input type="number" id="price" name="price" step="0.01" required>
+            <input type="number" id="price" name="price" step="0.05" required>
         </div>
         <div>
-            <label for="quantity">Quantità:</label>
-            <input type="number" id="quantity" name="quantity" required>
+            <label for="category">Categoria:</label>
+            <select id="category" name="category" required>
+                <% categorie.forEach(function (category) { %>
+                    <option value="<%= category %>"><%= category %></option>
+                <% }); %>
+            </select>
         </div>
         <div>
             <label for="photo">Foto Principale:</label>
             <input type="file" id="photo" name="photo" accept="image/*" required>
         </div>
+        <div>
+            <% for (let i = 1; i <= 4; i++) { %>
+                <label for="additionalPhoto<%= i %>">Foto Addizionale <%= i %>:</label>
+                <input type="file" id="additionalPhoto<%= i %>" name="additionalPhotos" accept="image/*">
+            <% } %>
+        </div>
         <button type="submit">Metti in Vendita</button>
     </form>
 </div>
-

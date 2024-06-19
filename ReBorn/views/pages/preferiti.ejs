@@ -1,0 +1,41 @@
+<% if (errorMessage.length > 0) { %>
+    <div class="alert alert-danger">
+        <% errorMessage.forEach(function(error) { %>
+            <%= error %><br>
+        <% }); %>
+    </div>
+<% } %>
+
+<div class="cart-page">
+    <div class="container">
+        <div class="cart-table">
+            <table>
+                <thead>
+                <tr>
+                    <th class="product-h">Prodotto</th>
+                    <th>Prezzo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if (preferiti){ %>
+                    <% preferiti.forEach(function (prodotto) { %>
+                        <tr>
+                            <td class="product-col">
+                                <img src="<%= prodotto.photo %>>" alt="<%= prodotto.nome %>">
+                                <div class="p-title">
+                                    <h5><%= prodotto.nome %></h5>
+                                </div>
+                            </td>
+                            <td class="price-col"><%= prodotto.prezzo %></td>
+                            <td>
+                                <a href="/cart/remove/<%= prodotto.id %>"
+                                   class="primary-btn pc-btn btn-remove">Rimuovi</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
