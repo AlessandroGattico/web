@@ -522,6 +522,7 @@ progress {
     line-height: 1.2;
 }
 
+
 @media (min-width: 1200px) {
     .display-3 {
         font-size: 4rem;

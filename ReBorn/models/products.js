@@ -253,28 +253,39 @@ exports.getVendutiUserId = function (userId) {
 
 exports.searchProducts = function (nome, prezzoMax, locazione) {
 	return new Promise((resolve, reject) => {
-		let query = 'SELECT * FROM product p ';
+
+		let query = `SELECT product.* 
+			FROM product, utenti, indirizzi
+			WHERE utenti.id = product.owner AND utenti.id = indirizzi.user_id  
+			AND product.available = 1
+			`
+
 		let params = [];
 
 		if (nome || prezzoMax || locazione) {
-			query += 'WHERE ';
+			query += 'AND ';
 
 			const conditions = [];
+
 			if (nome) {
-				conditions.push('p.nome LIKE ?');
+				conditions.push('product.nome LIKE ?');
 				params.push(`%${nome}%`);
 			}
+
 			if (prezzoMax) {
-				conditions.push('p.prezzo <= ?');
+				conditions.push('product.prezzo <= ?');
 				params.push(parseFloat(prezzoMax));
 			}
 
 			if (locazione) {
-				conditions.push('(p.city LIKE ? OR p.state LIKE ? OR p.provincia LIKE ?)');
+				conditions.push('(indirizzi.city LIKE ? OR indirizzi.state LIKE ? OR indirizzi.provincia LIKE ? )');
 				params.push(`%${locazione}%`, `%${locazione}%`, `%${locazione}%`);
+				console.log(conditions, query)
 			}
 
 			query += conditions.join(' AND ');
+			console.log(query)
+			console.log(params)
 
 			db.all(query, params, (err, results) => {
 				if (err) {
