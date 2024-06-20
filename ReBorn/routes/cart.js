@@ -37,7 +37,6 @@ router.get('/', async (req, res) => {
 			res.redirect('/login');
 		}
 	} catch (err) {
-		console.error(err);
 		res.status(500).send('Errore del server');
 	}
 });
@@ -51,7 +50,7 @@ router.get('/add/:productId', async (req, res) => {
 			const userId = req.user.id;
 
 			await prod.addToCart(productId, userId);
-			
+
 			req.user.carrello = await prod.getCartItemsByUserId(req.user.id);
 
 			res.redirect('/');
@@ -59,7 +58,6 @@ router.get('/add/:productId', async (req, res) => {
 			res.redirect('/login');
 		}
 	} catch (err) {
-		console.error(err);
 		res.status(500).send('Errore del server');
 	}
 });
@@ -81,7 +79,6 @@ router.get('/remove/:productId', async (req, res) => {
 			res.redirect('/login');
 		}
 	} catch (err) {
-		console.error(err);
 		res.status(500).send('Errore del server');
 	}
 });

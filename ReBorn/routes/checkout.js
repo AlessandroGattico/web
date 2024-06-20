@@ -39,7 +39,6 @@ router.get('/', async (req, res) => {
 			res.redirect('/login');
 		}
 	} catch (err) {
-		console.error(err);
 		res.status(500).send('Errore del server');
 	}
 });
@@ -49,13 +48,50 @@ router.post('/buy', async (req, res) => {
 		if (req.user && req.user.role === 'ADMIN') {
 			res.redirect('/admin/dashboard')
 		} else if (req.user && req.user.role === 'USER') {
+			const userId = req.user.id;
 
+			const cartItems = await prod.getCartItemsByUserId(userId);
+
+			let total = 0;
+			for (const item of cartItems) {
+				total += item.prezzo;
+			}
+
+			const saldoUtente = parseFloat(req.user.saldo)
+
+			if (saldoUtente >= total) {
+				const updatedUsers = [];
+
+				for (const item of cartItems) {
+					const nuovoSaldoUtente = saldoUtente - item.prezzo;
+					updatedUsers.push(userDao.updateBorsellino(userId, nuovoSaldoUtente));
+
+					const product = await prod.getProductById(item.id);
+					const ownerId = product.owner;
+					const nuovoSaldoProprietario = await userDao.getBorsellinoUser(ownerId) + item.prezzo;
+					updatedUsers.push(userDao.updateBorsellino(ownerId, nuovoSaldoProprietario));
+
+					await prod.addToAcquistati(item.id, userId);
+
+					await prod.updateProductAvailability(item.id, 0);
+
+					await prod.removeFromCart(item.id, userId);
+				}
+
+				await Promise.all(updatedUsers);
+
+				req.flash('success', 'Acquisto completato con successo!');
+				res.redirect('/');
+			} else {
+				req.flash('error', 'Saldo insufficiente per completare l\'acquisto');
+				res.redirect('/cart');
+			}
 		} else {
 			res.redirect('/login');
 		}
 	} catch (err) {
-		console.error(err);
-		res.status(500).send('Errore del server');
+		req.flash('error', 'Errore durante il checkout');
+		res.redirect('/cart');
 	}
 });
 

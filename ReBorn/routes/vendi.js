@@ -67,12 +67,10 @@ router.post('/vendi', upload.fields([
 
 			await sell.insertProductPhotos(productId, additionalPhotos);
 		} else {
-			console.log('Nessuna foto aggiuntiva da inserire');
 		}
 
 		res.redirect('/');
 	} catch (err) {
-		console.error(err);
 		req.flash('error', 'Errore durante l\'inserimento del prodotto');
 		res.redirect('/vendi');
 	}

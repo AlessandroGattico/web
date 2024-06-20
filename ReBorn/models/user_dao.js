@@ -13,7 +13,6 @@ exports.insertNewUser = function (utente) {
 
 				db.run(sql, [utente.nome, utente.cognome, utente.username, utente.password, role], function (err) {
 					if (err) {
-						console.error('Errore durante l\'inserimento:', err);
 						reject(err);
 					} else {
 						const userId = this.lastID;
@@ -22,10 +21,8 @@ exports.insertNewUser = function (utente) {
 
 						db.run(addressSql, [userId, utente.via, utente.citta, utente.paese, utente.zipcode, utente.provincia, true], function (err) {
 							if (err) {
-								console.error('Errore durante l\'inserimento:', err);
 								reject(err);
 							} else {
-								console.log('Utente inserito', utente);
 								resolve();
 							}
 						});
@@ -33,7 +30,6 @@ exports.insertNewUser = function (utente) {
 				});
 			})
 			.catch((err) => {
-				console.error('Errore durante la generazione dell\'hash della nuova password:', err);
 				reject(err);
 			});
 	});
@@ -69,28 +65,6 @@ exports.getUser = function (email, password) {
 	});
 };
 
-
-exports.getUsers = function () {
-	return new Promise((resolve, reject) => {
-		const sql = 'SELECT id, nome, cognome, mail, role, insert_time FROM utenti';
-
-		db.all(sql, [], (err, rows) => {
-			if (err) {
-				reject(err);
-			} else {
-				const users = rows.map(row => ({
-					id: row.id,
-					nome: row.nome,
-					cognome: row.cognome,
-					mail: row.mail,
-					role: row.role,
-					time: row.insert_time
-				}));
-				resolve(users);
-			}
-		});
-	});
-};
 
 exports.getUserById = function (id) {
 	return new Promise((resolve, reject) => {
@@ -249,31 +223,37 @@ exports.getUserAddress = function (userId) {
 };
 
 
-exports.getAllProductsAdmin = function () {
+exports.updateBorsellino = function (userId, newAmount) {
 	return new Promise((resolve, reject) => {
 		const sql = `
-      SELECT 
-        p.id, p.nome, p.descrizione, p.prezzo, p.available, p.insert_time, p.categoria,
-        u.mail AS owner_email 
-      FROM product p
-      JOIN utenti u ON p.owner = u.id
+      UPDATE utenti
+      SET saldo = ?
+      WHERE id = ?
     `;
 
-		db.all(sql, [], (err, rows) => {
+		db.run(sql, [newAmount, userId], function (err, row) {
 			if (err) {
 				reject(err);
 			} else {
-				const products = rows.map(row => ({
-					id: row.id,
-					nome: row.nome,
-					descrizione: row.descrizione,
-					prezzo: row.prezzo,
-					available: row.available,
-					proprietario: row.owner_email,
-					categoria: row.categoria,
-					time: row.insert_time
-				}));
-				resolve(products);
+				resolve(row);
+			}
+		});
+	});
+};
+
+exports.getBorsellinoUser = function (userId) {
+	return new Promise((resolve, reject) => {
+		const sql = `
+      	SELECT saldo
+      	FROM utenti 
+      	WHERE id = ?;
+    `;
+
+		db.all(sql, [userId], function (err, row) {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(row);
 			}
 		});
 	});

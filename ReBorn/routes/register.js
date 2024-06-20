@@ -24,7 +24,6 @@ router.get('/', async function (req, res, next) {
 
 router.post('/register', async function (req, res, next) {
 	if (Object.keys(req.body).length === 0) {
-		console.error('Il corpo della richiesta è vuoto!');
 		return res.status(400).send('Errore: nessun dato ricevuto');
 	}
 
@@ -35,7 +34,6 @@ router.post('/register', async function (req, res, next) {
 
 	if (existUser === false) {
 		if (password !== confirmPassword) {
-			console.log('password')
 			res.render('layouts/layout', {
 				title: 'ReBorn - Register',
 				categorie: categs,
@@ -47,7 +45,6 @@ router.post('/register', async function (req, res, next) {
 				scripts: false,
 			});
 		} else if (password.includes(' ') || password.length < 8) {
-			console.log('password spazio')
 			res.render('layouts/layout', {
 				title: 'ReBorn - Register',
 				categorie: categs,

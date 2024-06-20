@@ -8,8 +8,6 @@ router.post('/search', async (req, res) => {
 		if (req.user && req.user.role === 'ADMIN') {
 			res.redirect('/admin/users')
 		} else {
-			console.log('Richiesta:', req.method, req.url);
-			console.log(req.body)
 			const {nome = '', prezzoMax = '', locazione = ''} = req.body;
 			const products = await prod.searchProducts(nome, prezzoMax, locazione);
 			const categs = await cat.getCategorieFromDb();
@@ -31,7 +29,6 @@ router.post('/search', async (req, res) => {
 			});
 		}
 	} catch (err) {
-		console.error(err);
 		res.status(500).send('Errore del server');
 	}
 });

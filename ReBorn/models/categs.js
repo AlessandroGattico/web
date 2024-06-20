@@ -46,3 +46,17 @@ exports.getCategoryStats = function () {
 		});
 	});
 };
+
+exports.addNew = function (categoria) {
+	return new Promise((resolve, reject) => {
+		const sql = `INSERT INTO categories (name) VALUES (?)`;
+
+		db.run(sql, [categoria], function (err) {
+			if (err) {
+				reject(err);
+			} else {
+				resolve();
+			}
+		});
+	});
+};

@@ -1,11 +1,3 @@
-<% if (errorMessage.length > 0) { %>
-    <div class="alert alert-danger">
-        <% errorMessage.forEach(function(error) { %>
-            <%= error %><br>
-        <% }); %>
-    </div>
-<% } %>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -52,7 +44,12 @@
                             <ul class="tags">
                                 <li><span>Categoria: </span><%= product.categoria %></li>
                             </ul>
-                            <a href="/cart/add/<%= product.id %>" class="primary-btn pc-btn">Add to cart</a>
+                            <% if(inCart) { %>
+                                <a href="/cart/remove/<%= product.id %>"
+                                   class="primary-btn pc-btn btn-remove" style="color: white">Rimuovi</a>
+                            <% } else { %>
+                                <a href="/cart/add/<%= product.id %>" class="primary-btn pc-btn">Add to cart</a>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -100,5 +97,4 @@
 			interval: 2000
 		});
 	});
-
 </script>

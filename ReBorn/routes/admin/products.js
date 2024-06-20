@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const userDao = require('../../models/user_dao')
+const admin = require('../../models/admin/admin')
 
 router.get('/', async (req, res) => {
 	if (req.user && req.user.role === 'ADMIN') {
-		const products = await userDao.getAllProductsAdmin();
+		const products = await admin.getAllProductsAdmin();
 
 		res.render('layouts/layoutAdmin', {
 			title: 'Admin - Dashboard',

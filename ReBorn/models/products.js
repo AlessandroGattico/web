@@ -56,7 +56,7 @@ exports.getProductsByCategory = function (categoryName, idUser = 1) {
       SELECT p.*, json_group_array(ph.photo) AS images
       FROM product p
       LEFT JOIN photos ph ON p.id = ph.product_id
-      WHERE p.categoria = ? and p.owner != ?
+      WHERE p.categoria = ? and p.owner != ? AND p.available = 1
       GROUP BY p.id
     `;
 
@@ -229,29 +229,15 @@ exports.getListedUser = function (userId) {
 	});
 };
 
-exports.addToVenduti = function (productId, userId) {
-	return new Promise((resolve, reject) => {
-		const sql = `
-      INSERT INTO venduti (product_id, user_id) 
-      VALUES (?, ?)
-    `;
-		db.run(sql, [productId, userId], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
-	});
-};
 
 exports.getVendutiUserId = function (userId) {
 	return new Promise((resolve, reject) => {
 		const sql = `
-      SELECT c.id AS sold_item_id, p.*
-      FROM venduti c
-      JOIN product p ON c.product_id = p.id
-      WHERE c.user_id = ?
+      	SELECT p.id, p.nome, p.descrizione, p.prezzo, p.foto_info, p.categoria
+		FROM product p
+		JOIN acquistati a ON p.id = a.product_id
+		WHERE p.owner = ?;
+
     `;
 
 		db.all(sql, [userId], (err, rows) => {
@@ -306,13 +292,12 @@ exports.searchProducts = function (nome, prezzoMax, locazione) {
 exports.insertNewProduct = function (product) {
 	return new Promise((resolve, reject) => {
 		const sql = `INSERT INTO product (nome, descrizione, foto_info, owner, categoria, prezzo) VALUES (?, ?, ?, ?, ?, ?)`;
+
 		db.run(sql, [product.nome, product.descrizione, product.photo, product.owner, product.categoria, product.prezzo], function (err) {
 			if (err) {
-				console.error('Errore durante l\'inserimento del prodotto:', err);
 				reject(err);
 			} else {
 				const productId = this.lastID;
-				console.log('Prodotto inserito con ID:', productId);
 				resolve(productId);
 			}
 		});
@@ -323,16 +308,33 @@ exports.insertProductPhotos = function (productId, photos) {
 	return new Promise((resolve, reject) => {
 
 		const sql = `INSERT INTO photos (photo, product_id) VALUES (?, ?)`;
+
 		photos.forEach((photo) => {
 			db.run(sql, [photo.photo, productId], function (err) {
 				if (err) {
-					console.error('Errore durante l\'inserimento delle foto:', err);
 					reject(err);
 				} else {
-					console.log('Foto inserite correttamente');
 					resolve();
 				}
 			});
+		});
+	});
+};
+
+exports.updateProductAvailability = function (productId, newAvailability) {
+	return new Promise((resolve, reject) => {
+		const sql = `
+      UPDATE product
+      SET available = ?
+      WHERE id = ?
+    `;
+
+		db.run(sql, [newAvailability, productId], function (err) {
+			if (err) {
+				reject(err);
+			} else {
+				resolve();
+			}
 		});
 	});
 };

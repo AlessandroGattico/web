@@ -1,13 +1,20 @@
-<% if (errorMessage.length > 0) { %>
-    <div class="alert alert-danger">
-        <% errorMessage.forEach(function(error) { %>
-            <%= error %><br>
-        <% }); %>
-    </div>
-<% } %>
-
 <div class="row">
     <div class="col-md-10 mx-auto">
+        <div class="card mb-4 mt-4">
+            <div class="card-header">
+                <i class="fas fa-plus me-1"></i>
+                Aggiungi Nuova Categoria
+            </div>
+            <div class="card-body">
+                <form action="/admin/categories/add" method="POST">
+                    <div class="mb-3">
+                        <label for="nomeCat" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nomeCat" name="nomeCat" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Aggiungi</button>
+                </form>
+            </div>
+        </div>
         <div class="card mb-4">
             <h4 class="text-center mb-3 mt-3">Categorie</h4>
             <div class="card mb-4">
@@ -62,21 +69,6 @@
                 </div>
             </div>
 
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-plus me-1"></i>
-                    Aggiungi Nuova Categoria
-                </div>
-                <div class="card-body">
-                    <form action="/admin/categories/add" method="POST">
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">Nome:</label>
-                            <input type="text" class="form-control" id="nome" name="nome" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Aggiungi</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>

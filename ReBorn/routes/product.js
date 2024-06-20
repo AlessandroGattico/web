@@ -13,20 +13,25 @@ router.get('/:id', async (req, res) => {
 
 		if (product) {
 			let id = 0;
+			let inCart = false;
 
 			if (req.user && req.user.role === 'USER') {
 				id = req.user.id;
+				const cart = await prod.getCartItemsByUserId(id);
+
+				inCart = cart.some(item => item.id === product.id);
 			}
 
 			const photos = await prod.getProductImagesById(product.id) || [];
 			const allCategs = await cat.getCategorieFromDb();
 			const randomProducts = await prod.getRandomProducts(4, product.categoria, productId, id);
 
+
 			photos.push(product.foto_info);
 
 			res.render('layouts/layout', {
 				title: 'ReBorn - Product',
-				product,
+				product: product,
 				images: photos,
 				categorie: allCategs,
 				randomProducts,
@@ -37,6 +42,7 @@ router.get('/:id', async (req, res) => {
 					"https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap",
 					"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", "../../css/style.css"],
 				page: '../pages/product',
+				inCart: inCart
 			});
 		} else {
 			// ... (gestione del caso in cui il prodotto non viene trovato)

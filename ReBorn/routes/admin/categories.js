@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const userDao = require('../../models/user_dao')
+const admin = require('../../models/admin/admin')
 const cat = require('../../models/categs');
 
 router.get('/', async (req, res) => {
 	if (req.user && req.user.role === 'ADMIN') {
-		const products = await userDao.getAllProductsAdmin();
+		const products = await admin.getAllProductsAdmin();
 		const categorie = await cat.getCategoryStats();
 
 		res.render('layouts/layoutAdmin', {
@@ -20,6 +20,22 @@ router.get('/', async (req, res) => {
 			scripts: false,
 			categorie: categorie
 		})
+	} else {
+		res.redirect('/login');
+	}
+})
+
+
+router.post('/add', async (req, res) => {
+	if (req.user && req.user.role === 'ADMIN') {
+		const products = await admin.getAllProductsAdmin();
+		const categorie = await cat.getCategoryStats();
+
+		const nuovaCategoria = req.body.nomeCat
+
+		await cat.addNew(nuovaCategoria);
+
+		res.redirect('/admin/categories')
 	} else {
 		res.redirect('/login');
 	}

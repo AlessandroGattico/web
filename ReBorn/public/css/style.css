@@ -453,6 +453,8 @@ ol {
 
 .nav-element {
     font-size: 20px;
+    color: #333333;
+    font-weight: bold;
 }
 
 /*---------------------
@@ -489,6 +491,11 @@ ol {
     height: 20px;
     width: 20px;
 }
+
+.btn-remove {
+    background-color: firebrick;
+}
+
 
 /*---------------------
   Hero Slider
