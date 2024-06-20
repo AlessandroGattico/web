@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cat = require('../models/categs.js');
 const multer = require('multer');
-const sell = require('../models/vendi');
+const sell = require('../models/products');
 
 const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
@@ -17,7 +17,7 @@ router.get('/', async function (req, res, next) {
 			error: false,
 			session: req.session,
 			user: req.user,
-			styles: false,
+			styles: ["css/categoria.css"],
 			scripts: false,
 		});
 	} else if (req.user && req.user.role === 'USER') {
@@ -27,11 +27,11 @@ router.get('/', async function (req, res, next) {
 			title: 'ReBorn - Vendi',
 			categorie: categs,
 			page: '../pages/vendi',
-			errorMessage: '',
-			error: false,
+			errorMessage: req.flash('error'),
+			error: req.flash('error').length > 0,
 			session: req.session,
 			user: req.user,
-			styles: false,
+			styles: ["css/categoria.css"],
 			scripts: false,
 		});
 	} else {
@@ -52,17 +52,12 @@ router.post('/vendi', upload.fields([
 			owner: req.user.id,
 		};
 
-		// Codifica Base64 della foto principale
 		if (req.files['photo']) {
 			const photoBuffer = req.files['photo'][0].buffer;
 			newProduct.photo = `data:${req.files['photo'][0].mimetype};base64,${photoBuffer.toString('base64')}`;
 		}
 
-		// Inserimento del prodotto con la foto principale
 		const productId = await sell.insertNewProduct(newProduct);
-
-		// Inserimento foto aggiuntive
-		const photos = [];
 
 		if (req.files['additionalPhotos'] && req.files['additionalPhotos'].length > 0) {
 			const additionalPhotos = req.files['additionalPhotos'].map(file => ({
@@ -70,7 +65,7 @@ router.post('/vendi', upload.fields([
 				product_id: productId
 			}));
 
-			await sell.insertProductPhotos(additionalPhotos);
+			await sell.insertProductPhotos(productId, additionalPhotos);
 		} else {
 			console.log('Nessuna foto aggiuntiva da inserire');
 		}

@@ -12,9 +12,13 @@ router.get('/', async (req, res) => {
 
 			let total = 0;
 
-			req.user.carrello.forEach(function (item) {
+			const carrello = await prod.getCartItemsByUserId(req.user.id);
+
+			carrello.forEach(function (item) {
 				total += parseFloat(item.prezzo)
 			})
+
+			req.user.carrello = carrello
 
 			res.render('layouts/layout', {
 				title: 'ReBorn - Cart',

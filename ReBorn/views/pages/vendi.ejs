@@ -1,36 +1,84 @@
-<div>
-    <h1>Metti in Vendita il Tuo Oggetto</h1>
+<div class="container custom-margin register-form">
     <form action="/vendi/vendi" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
+        <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+            <% errors.forEach(error => { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <%= error.msg %>
+                </div>
+            <% }) %>
+        <% } %>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Metti in Vendita il Tuo Oggetto</h2>
+            </div>
         </div>
-        <div>
-            <label for="description">Descrizione:</label>
-            <textarea id="description" name="description" required></textarea>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" placeholder="Nome del prodotto" required
+                           class="form-control">
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="price">Prezzo:</label>
-            <input type="number" id="price" name="price" step="0.05" required>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <label for="description">Descrizione:</label>
+                    <textarea id="description" name="description" placeholder="Descrizione dettagliata del prodotto"
+                              required class="form-control"></textarea>
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="category">Categoria:</label>
-            <select id="category" name="category" required>
-                <% categorie.forEach(function (category) { %>
-                    <option value="<%= category %>"><%= category %></option>
-                <% }); %>
-            </select>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <label for="price">Prezzo:</label>
+                    <input type="number" id="price" name="price" placeholder="Prezzo" step="0.05" required
+                           class="form-control">
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <label for="category">Categoria:</label>
+                    <select id="category" name="category" required class="form-control">
+                        <% categorie.forEach(function (category) { %>
+                            <option value="<%= category %>"><%= category %></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="photo">Foto Principale:</label>
-            <input type="file" id="photo" name="photo" accept="image/*" required>
+
+        <div class="row">
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <label for="photo">Foto Principale:</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" required class="form-control-file">
+                </div>
+            </div>
         </div>
-        <div>
+
+        <div class="row">
             <% for (let i = 1; i <= 4; i++) { %>
-                <label for="additionalPhoto<%= i %>">Foto Addizionale <%= i %>:</label>
-                <input type="file" id="additionalPhoto<%= i %>" name="additionalPhotos" accept="image/*">
+                <div class="col">
+                    <div class="mb-3 mt-3">
+                        <label for="additionalPhoto<%= i %>">Foto Addizionale <%= i %>:</label>
+                        <input type="file" id="additionalPhoto<%= i %>" name="additionalPhotos" accept="image/*"
+                               class="form-control-file">
+                    </div>
+                </div>
             <% } %>
         </div>
-        <button type="submit">Metti in Vendita</button>
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-success mt-3 mb-3">Metti in Vendita</button>
+            </div>
+        </div>
     </form>
 </div>
+

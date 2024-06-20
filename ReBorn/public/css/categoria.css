@@ -1,25 +1,25 @@
-.card-img-top {
-    height: 200px;
-    width: 100%;
-    object-fit: contain;
-}
-
-.card:hover {
+.product-card:hover {
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.image-container-prod {
-    height: 200px;
-    width: 100px;
-    overflow: hidden; /* Nasconde le parti dell'immagine che escono dal contenitore */
-    display: flex;     /* Utilizza Flexbox per centrare l'immagine */
-    justify-content: center; /* Centra orizzontalmente */
-    align-items: center;    /* Centra verticalmente */
+.product-card {
+    height: 300px;
+    width: 200px; /* Altezza totale della card (personalizzabile) */
 }
 
-.image-container-prod img {
-    height: auto;
-    max-width: 100%;
-    object-fit: contain;
+.product-image {
+    max-height: 175px; /* L'immagine occupa il 75% dell'altezza della card */
+    object-fit: contain; /* Mantiene le proporzioni dell'immagine */
+    /* Centra l'immagine orizzontalmente */
+    margin: 10px auto 0;
 }
+
+.card-body {
+    height: 25%; /* Il contenuto testuale occupa il 25% dell'altezza della card */
+}
+
+.price {
+    font-weight: bold;
+}
+

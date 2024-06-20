@@ -21,7 +21,7 @@ exports.getProductById = function (productId) {
 					insert_time: row.insert_time,
 					photo: row.foto_info,
 				};
-				resolve(product);
+				resolve(row);
 			}
 		});
 	});
@@ -30,16 +30,19 @@ exports.getProductById = function (productId) {
 exports.getProductImagesById = function (productId) {
 	return new Promise((resolve, reject) => {
 		const sql = `
-            SELECT ph.photo AS images
-            FROM photos ph
-            WHERE ph.product_id = ?
+            SELECT photo
+            FROM photos
+            WHERE product_id = ?;
         `;
 
 		db.all(sql, [productId], (err, rows) => {
 			if (err) {
 				reject(err);
 			} else {
-				const images = rows.map(row => row.images);
+				let images = [];
+				rows.forEach(row => {
+					images.push(row.photo)
+				})
 				resolve(images);
 			}
 		});
@@ -47,17 +50,17 @@ exports.getProductImagesById = function (productId) {
 };
 
 
-exports.getProductsByCategory = function (categoryName) {
+exports.getProductsByCategory = function (categoryName, idUser = 1) {
 	return new Promise((resolve, reject) => {
 		const sql = `
       SELECT p.*, json_group_array(ph.photo) AS images
       FROM product p
       LEFT JOIN photos ph ON p.id = ph.product_id
-      WHERE p.categoria = ?
+      WHERE p.categoria = ? and p.owner != ?
       GROUP BY p.id
     `;
 
-		db.all(sql, [categoryName], (err, rows) => {
+		db.all(sql, [categoryName, idUser], (err, rows) => {
 			if (err) {
 				reject(err);
 			} else {
@@ -70,7 +73,7 @@ exports.getProductsByCategory = function (categoryName) {
 					owner: row.owner,
 					categoria: row.categoria,
 					insert_time: row.insert_time,
-					photo: row.photo,
+					photo: row.foto_info,
 					images: JSON.parse(row.images || '[]')
 				}));
 				resolve(products);
@@ -80,17 +83,17 @@ exports.getProductsByCategory = function (categoryName) {
 };
 
 
-exports.getRandomProducts = function (limit = 4, categoria, idProd) {
+exports.getRandomProducts = function (limit = 4, categoria, idProd, idUser = 0) {
 	return new Promise((resolve, reject) => {
 		const sql = `
       SELECT *
       FROM product
-      WHERE available = 1 AND categoria = ? AND id != ?
+      WHERE available = 1 AND categoria = ? AND id != ? AND owner != ?
       ORDER BY RANDOM()
       LIMIT ?
     `;
 
-		db.all(sql, [categoria, idProd, limit], (err, rows) => {
+		db.all(sql, [categoria, idProd, idUser, limit], (err, rows) => {
 			if (err) {
 				reject(err);
 			} else {
@@ -100,17 +103,17 @@ exports.getRandomProducts = function (limit = 4, categoria, idProd) {
 	});
 };
 
-exports.getLatestProducts = function (limit = 8) {
+exports.getLatestProducts = function (limit = 8, userId = 1) {
 	return new Promise((resolve, reject) => {
 		const sql = `
       SELECT *
       FROM product
-      WHERE available = 1
+      WHERE available = 1 AND owner != ?
       ORDER BY insert_time DESC
       LIMIT ?
     `;
 
-		db.all(sql, [limit], (err, rows) => {
+		db.all(sql, [userId, limit], (err, rows) => {
 			if (err) {
 				reject(err);
 			} else {
@@ -172,60 +175,8 @@ exports.getCartItemsByUserId = function (userId) {
 	});
 };
 
-
-
-exports.addToFavs = function (productId, userId) {
-	return new Promise((resolve, reject) => {
-		const sql = `
-      INSERT INTO preferiti (product_id, user_id) 
-      VALUES (?, ?)
-    `;
-		db.run(sql, [productId, userId], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
-	});
-};
-
-exports.removeFromFavs = function (productId, userId) {
-	return new Promise((resolve, reject) => {
-		const sql = `
-      DELETE FROM preferiti 
-      WHERE product_id = ? AND user_id = ?; 
-    `;
-		db.run(sql, [productId, userId], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
-	});
-};
-
-exports.getFavsUserId = function (userId) {
-	return new Promise((resolve, reject) => {
-		const sql = `
-      SELECT c.id AS favs_item_id, p.*
-      FROM preferiti c
-      JOIN product p ON c.product_id = p.id
-      WHERE c.user_id = ?
-    `;
-
-		db.all(sql, [userId], (err, rows) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(rows);
-			}
-		});
-	});
-};
-
 exports.addToAcquistati = function (productId, userId) {
+
 	return new Promise((resolve, reject) => {
 		const sql = `
       INSERT INTO acquistati (product_id, user_id) 
@@ -248,6 +199,24 @@ exports.getAcquistatiUserId = function (userId) {
       FROM acquistati c
       JOIN product p ON c.product_id = p.id
       WHERE c.user_id = ?
+    `;
+
+		db.all(sql, [userId], (err, rows) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(rows);
+			}
+		});
+	});
+};
+
+exports.getListedUser = function (userId) {
+	return new Promise((resolve, reject) => {
+		const sql = `
+      SELECT *
+      FROM product 
+      WHERE owner = ?;
     `;
 
 		db.all(sql, [userId], (err, rows) => {
@@ -291,6 +260,79 @@ exports.getVendutiUserId = function (userId) {
 			} else {
 				resolve(rows);
 			}
+		});
+	});
+};
+
+
+exports.searchProducts = function (nome, prezzoMax, locazione) {
+	return new Promise((resolve, reject) => {
+		let query = 'SELECT * FROM product p ';
+		let params = [];
+
+		if (nome || prezzoMax || locazione) {
+			query += 'WHERE ';
+
+			const conditions = [];
+			if (nome) {
+				conditions.push('p.nome LIKE ?');
+				params.push(`%${nome}%`);
+			}
+			if (prezzoMax) {
+				conditions.push('p.prezzo <= ?');
+				params.push(parseFloat(prezzoMax));
+			}
+
+			if (locazione) {
+				conditions.push('(p.city LIKE ? OR p.state LIKE ? OR p.provincia LIKE ?)');
+				params.push(`%${locazione}%`, `%${locazione}%`, `%${locazione}%`);
+			}
+
+			query += conditions.join(' AND ');
+
+			db.all(query, params, (err, results) => {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(results);
+				}
+			});
+		} else {
+			resolve([])
+		}
+	});
+};
+
+exports.insertNewProduct = function (product) {
+	return new Promise((resolve, reject) => {
+		const sql = `INSERT INTO product (nome, descrizione, foto_info, owner, categoria, prezzo) VALUES (?, ?, ?, ?, ?, ?)`;
+		db.run(sql, [product.nome, product.descrizione, product.photo, product.owner, product.categoria, product.prezzo], function (err) {
+			if (err) {
+				console.error('Errore durante l\'inserimento del prodotto:', err);
+				reject(err);
+			} else {
+				const productId = this.lastID;
+				console.log('Prodotto inserito con ID:', productId);
+				resolve(productId);
+			}
+		});
+	});
+};
+
+exports.insertProductPhotos = function (productId, photos) {
+	return new Promise((resolve, reject) => {
+
+		const sql = `INSERT INTO photos (photo, product_id) VALUES (?, ?)`;
+		photos.forEach((photo) => {
+			db.run(sql, [photo.photo, productId], function (err) {
+				if (err) {
+					console.error('Errore durante l\'inserimento delle foto:', err);
+					reject(err);
+				} else {
+					console.log('Foto inserite correttamente');
+					resolve();
+				}
+			});
 		});
 	});
 };

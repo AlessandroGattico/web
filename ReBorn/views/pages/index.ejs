@@ -26,112 +26,52 @@
     </div>
 </section>
 
+
 <section class="search-index">
     <div class="container mt-4">
-        <div class="card p-4">
-            <div class="card-body">
-                <h5 class="card-title text-left"><i class="fas fa-search"></i>Ricerca Oggetti Usati</h5>
-                <form action="/search" method="get">
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label for="categoria"><i class="fas fa-tags"></i>Categoria</label>
-                            <select class="form-control" id="categoria">
-                                <option value="">Seleziona...</option>
-                                <option>Libri</option>
-                                <option>Elettronica</option>
-                                <option>Arredamento</option>
-                                <option>Abbigliamento</option>
-                                <option>Attrezzature Sportive</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="prezzoMax"><i class="fas fa-euro-sign"></i>Prezzo Massimo</label>
-                            <input type="number" class="form-control" id="prezzoMax"
-                                   placeholder="Inserisci prezzo massimo">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="locazione"><i class="fas fa-map-marker-alt"></i>Locazione</label>
-                            <input type="text" class="form-control" id="locazione" placeholder="Città, Regione">
-                        </div>
+        <div class="card">
+            <div class="card-body p-4">
+                <h4 class="card-title text-center mb-4">Ricerca Oggetti</h4>
+                <form action="/search/search" method="POST" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="nome" class="form-label">Nome prodotto</label>
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Inserisci il nome">
                     </div>
-                    <div class="form-row justify-content-center">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>Cerca</button>
+                    <div class="col-md-4">
+                        <label for="prezzoMax" class="form-label">Prezzo Massimo</label>
+                        <input type="number" class="form-control" id="prezzoMax" name="prezzoMax" min="0"
+                               placeholder="Inserisci prezzo massimo">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="locazione" class="form-label">Locazione</label>
+                        <input type="text" class="form-control" id="locazione" name="locazione"
+                               placeholder="Città, Regione">
+                    </div>
+                    <div class="col-12 text-center mt-2">
+                        <button type="submit" class="btn btn-primary">Cerca</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </section>
 
 <section class="features-section spad">
     <div class="features-ads">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="single-features-ads first">
                         <img src="img/icons/f-delivery.png" alt="">
                         <h4>Free shipping</h4>
-                        <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal
-                            esuada aliquet libero viverra cursus. </p>
+                        <p>Tu ordini, noi paghiamo la spedizione in tutta italia.</p>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="single-features-ads second">
-                        <img src="img/icons/coin.png" alt="">
-                        <h4>100% Money back </h4>
-                        <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
-                            aliquet libero viverra cursus. </p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="single-features-ads">
                         <img src="img/icons/chat.png" alt="">
                         <h4>Online support 24/7</h4>
-                        <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
-                            aliquet libero viverra cursus. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="features-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="single-box-item first-box">
-                                <img src="img/f-box-1.jpg" alt="">
-                                <div class="box-text">
-                                    <span class="trend-year">2019 Party</span>
-                                    <h2>Jewelry</h2>
-                                    <span class="trend-alert">Trend Allert</span>
-                                    <a href="#" class="primary-btn">See More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="single-box-item second-box">
-                                <img src="img/f-box-2.jpg" alt="">
-                                <div class="box-text">
-                                    <span class="trend-year">2019 Trend</span>
-                                    <h2>Footwear</h2>
-                                    <span class="trend-alert">Bold & Black</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-box-item large-box">
-                        <img src="img/f-box-3.jpg" alt="">
-                        <div class="box-text">
-                            <span class="trend-year">2019 Party</span>
-                            <h2>Collection</h2>
-                            <div class="trend-alert">Trend Allert</div>
-                        </div>
+                        <p>Qualcosa è andato storto? Non esitare a contattarci</p>
                     </div>
                 </div>
             </div>
@@ -145,7 +85,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="section-title">
-                        <h2>Latest Products</h2>
+                        <h2>Ultimi prodotti</h2>
                     </div>
                 </div>
             </div>
@@ -153,17 +93,14 @@
         <div class="row">
             <% products.forEach((product, index) => { %>
                 <a href="/product/<%= product.id %>" class="col-md-3 mb-4 text-decoration-none">
-                    <div class="card h-300">
-                        <div class="image-container-prod">
-                            <figure>
-                                <img src="<%= product.photo %>" class="card-img-top" alt="<%= product.nome %>">
-                            </figure>
+                    <div class="card product-card">
+                        <div class="card-img-top text-center">
+                            <img src="<%= product.foto_info %>" alt="<%= product.nome %>"
+                                 class="img-fluid product-image">
                         </div>
-                        <br>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title"><%= product.nome %></h5>
-                            <p class="card-text flex-grow-1"><%= product.descrizione.substring(0, 100) %>...</p>
-                            <p class="card-text">Prezzo: €<%= product.prezzo %></p>
+                        <div class="card-body d-flex flex-column justify-content-end">
+                            <h5 class="card-title text-center"><%= product.nome %></h5>
+                            <p class="card-text text-center price">€ <%= product.prezzo %></p>
                         </div>
                     </div>
                 </a>

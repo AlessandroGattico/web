@@ -52,6 +52,14 @@
     background-image: url('data:image/svg+xml;charset=utf8,<svg fill="%23000" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4.707 7.707L3.293 6.293 5.586 4 3.293 1.707 4.707.293 7.414 3l-2.707 2.707zM0 3h7v2H0V3z"/></svg>');
 }
 
+.carousel-control-prev-icon-prod, .carousel-control-next-icon-prod {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: transparent no-repeat center center;
+    background-image: url('data:image/svg+xml;charset=utf8,<svg fill="%23000" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4.707 7.707L3.293 6.293 5.586 4 3.293 1.707 4.707.293 7.414 3l-2.707 2.707zM0 3h7v2H0V3z"/></svg>');
+}
+
 .carousel-control-prev-icon {
     transform: scaleX(-1);
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cat = require('../models/categs.js');
 const prod = require('../models/products.js');
+const userDao = require("../models/user_dao");
 
 router.get('/', async (req, res) => {
 	try {
@@ -9,13 +10,16 @@ router.get('/', async (req, res) => {
 			res.redirect('/admin/dashboard')
 		} else if (req.user && req.user.role === 'USER') {
 			const categorie = await cat.getCategorieFromDb()
-			const carrello = req.user.carrello
 
 			let total = 0;
+
+			const carrello = await prod.getCartItemsByUserId(req.user.id);
 
 			carrello.forEach(function (item) {
 				total += parseFloat(item.prezzo)
 			})
+
+			const indirizzo = await userDao.getUserAddress(req.user.id);
 
 			res.render('layouts/layout', {
 				title: 'ReBorn - Checkout',
@@ -27,8 +31,9 @@ router.get('/', async (req, res) => {
 				user: req.user,
 				session: req.session,
 				categorie: categorie,
-				carrello: req.user.carrello,
-				total
+				carrello: carrello,
+				indirizzo: indirizzo,
+				totale: total
 			})
 		} else {
 			res.redirect('/login');
@@ -39,35 +44,12 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/add/:productId', async (req, res) => {
+router.post('/buy', async (req, res) => {
 	try {
 		if (req.user && req.user.role === 'ADMIN') {
 			res.redirect('/admin/dashboard')
 		} else if (req.user && req.user.role === 'USER') {
-			const productId = req.params.productId;
-			const userId = req.user.id;
 
-			await cart.addToCart(productId, userId);
-			res.redirect('/product/:productId');
-		} else {
-			res.redirect('/login');
-		}
-	} catch (err) {
-		console.error(err);
-		res.status(500).send('Errore del server');
-	}
-});
-
-router.get('/remove/:productId', async (req, res) => {
-	try {
-		if (req.user && req.user.role === 'ADMIN') {
-			res.redirect('/admin/dashboard')
-		} else if (req.user && req.user.role === 'USER') {
-			const productId = req.params.productId;
-			const userId = req.user.id;
-
-			await cart.removeFromCart(productId, userId);
-			res.redirect('/cart');
 		} else {
 			res.redirect('/login');
 		}

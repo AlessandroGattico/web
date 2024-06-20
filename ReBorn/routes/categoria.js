@@ -5,11 +5,17 @@ const prod = require('../models/products.js');
 
 router.get('/:categoryName', async (req, res) => {
 	if (req.user && req.user.role === 'ADMIN') {
-		res.redirect('/admin/dashboard')
+		res.redirect('/admin/users')
 	} else {
+		let id = 1;
+
+		if (req.user) {
+			id = req.user.id;
+		}
+
 		const categoryName = req.params.categoryName;
 
-		const products = await prod.getProductsByCategory(categoryName);
+		const products = await prod.getProductsByCategory(categoryName, id);
 
 		const allCategs = await cat.getCategorieFromDb()
 

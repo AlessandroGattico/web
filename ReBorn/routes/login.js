@@ -57,14 +57,10 @@ router.post('/login', [
 				return res.redirect('/admin/users');
 			} else {
 				const carrello = await prod.getCartItemsByUserId(req.user.id)
-				const preferiti = await prod.getFavsUserId(req.user.id);
-				const venduti = await prod.getFavsUserId(req.user.id);
 				const acquistati = await prod.getAcquistatiUserId(req.user.id);
 				const indirizzo = await userDao.getUserAddress(req.user.id);
 
 				req.user.carrello = carrello
-				req.user.preferiti = preferiti
-				req.user.venduti = venduti
 				req.user.acquistati = acquistati
 				req.user.indirizzo = indirizzo
 

@@ -23,18 +23,15 @@ const categsRouter = require('./routes/categories');
 const vendiRouter = require('./routes/vendi');
 const categoriaRouter = require('./routes/categoria');
 const contactRouter = require('./routes/contact');
+const searchRouter = require('./routes/search');
+const profileRouter = require('./routes/profile');
 
-const adminDashboardRouter = require('./routes/admin/dashboard');
 const adminProductsRouter = require('./routes/admin/products');
 const adminUsersRouter = require('./routes/admin/users');
 const adminCategoriesRouter = require('./routes/admin/categories');
 
 const app = express();
-/*
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cookieParser());
-*/
+
 requirejs.config({
 	baseUrl: __dirname,
 	nodeRequire: require
@@ -117,8 +114,9 @@ app.use('/product', productRouter);
 app.use('/cart', cartRouter);
 app.use('/checkout', checkoutRouter);
 app.use('/contact', contactRouter);
+app.use('/search', searchRouter);
+app.use('/profile', profileRouter);
 
-app.use('/admin/dashboard', adminDashboardRouter);
 app.use('/admin/users', adminUsersRouter);
 app.use('/admin/categories', adminCategoriesRouter);
 app.use('/admin/products', adminProductsRouter);

@@ -16,6 +16,8 @@ router.get('/', async function (req, res, next) {
 			user: null,
 			styles: false,
 			scripts: false,
+			errorMessage: req.flash('error'),
+			error: req.flash('error').length > 0,
 		});
 	}
 });

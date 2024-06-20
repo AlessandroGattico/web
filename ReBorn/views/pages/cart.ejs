@@ -13,6 +13,7 @@
                 <thead>
                 <tr>
                     <th class="product-h">Prodotto</th>
+                    <th>Nome</th>
                     <th>Prezzo</th>
                     <th></th>
                 </tr>
@@ -23,12 +24,13 @@
                         <tr>
                             <td class="product-col">
                                 <a href="/product/<%= prodotto.id %>" class="product-link">
-                                    <img src="<%= prodotto.photo %>" alt="<%= prodotto.nome %>">
-                                    <div class="p-title">
-                                        <h5><%= prodotto.nome %></h5>
+                                    <div class="card-img-top text-center">
+                                        <img src="<%= prodotto.foto_info %>" alt="<%= prodotto.nome %>"
+                                             class="img-fluid product-image">
                                     </div>
                                 </a>
                             </td>
+                            <td class="name-col"><%= prodotto.nome %></td>
                             <td class="price-col"><%= prodotto.prezzo %></td>
                             <td>
                                 <a href="/cart/remove/<%= prodotto.id %>"

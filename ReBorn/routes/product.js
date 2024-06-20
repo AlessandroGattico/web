@@ -10,33 +10,37 @@ router.get('/:id', async (req, res) => {
 		const productId = req.params.id;
 
 		const product = await prod.getProductById(productId);
-		product.images = await prod.getProductImagesById(productId);
 
-		console.log(product.photo)
+		if (product) {
+			let id = 0;
 
-		const allCategs = await cat.getCategorieFromDb()
-		const randomProducts = await prod.getRandomProducts(4, product.categoria, productId);
+			if (req.user && req.user.role === 'USER') {
+				id = req.user.id;
+			}
 
-		if (!product) {
-			req.flash('error', 'Nessun prodotto trovato per questa categoria');
-			return res.redirect('/categories');
+			const photos = await prod.getProductImagesById(product.id) || [];
+			const allCategs = await cat.getCategorieFromDb();
+			const randomProducts = await prod.getRandomProducts(4, product.categoria, productId, id);
+
+			photos.push(product.foto_info);
+
+			res.render('layouts/layout', {
+				title: 'ReBorn - Product',
+				product,
+				images: photos,
+				categorie: allCategs,
+				randomProducts,
+				errorMessage: req.flash('error'),
+				error: req.flash('error').length > 0,
+				scripts: ["https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"],
+				styles: ['../../css/categoria.css', "https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap",
+					"https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap",
+					"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", "../../css/style.css"],
+				page: '../pages/product',
+			});
+		} else {
+			// ... (gestione del caso in cui il prodotto non viene trovato)
 		}
-
-		res.render('layouts/layout', {
-			title: 'ReBorn - Product',
-			product,
-			categorie: allCategs,
-			randomProducts,
-			errorMessage: req.flash('error'),
-			error: req.flash('error').length > 0,
-			scripts: ["https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js", "../../js/main.js",
-				"../../js/owl.carousel.min.js"
-			],
-			styles: ['../../css/product.css', "https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap",
-				"https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap",
-				"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", "../../css/style.css"],
-			page: '../pages/product',
-		});
 	}
 });
 

@@ -20,7 +20,7 @@ exports.insertNewUser = function (utente) {
 						const addressSql = `INSERT INTO indirizzi (user_id, indirizzo, city, state, zip_code, provincia, is_default)
                                             VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-						db.run(addressSql, [userId, utente.via, utente.citta, utente.paese, utente.zipcode, utente.paese, true], function (err) {
+						db.run(addressSql, [userId, utente.via, utente.citta, utente.paese, utente.zipcode, utente.provincia, true], function (err) {
 							if (err) {
 								console.error('Errore durante l\'inserimento:', err);
 								reject(err);

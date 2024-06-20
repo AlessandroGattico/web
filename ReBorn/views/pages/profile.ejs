@@ -1,40 +1,245 @@
 <% if (errorMessage.length > 0) { %>
-	<div class="alert alert-danger">
-		<% errorMessage.forEach(function(error) { %>
-			<%= error %><br>
-		<% }); %>
-	</div>
+    <div class="alert alert-danger">
+        <% errorMessage.forEach(function(error) { %>
+            <%= error %><br>
+        <% }); %>
+    </div>
 <% } %>
 
-<div class="tab-pane fade show active" id="datiPersonali">
-	<h3>Dati Personali</h3>
 
-	<div class="d-flex align-items-center mb-3">
-		<img src="https://via.placeholder.com/100" class="rounded-circle me-3" alt="Placeholder foto profilo">
-		<div>
-			<h4><%= user.nome %> <%= user.cognome %></h4>
-			<p class="text-muted"><%= user.email %></p>
-		</div>
-	</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body d-flex">
+                    <div class="col-md-2"></div>
+                    <div class="profile-image col-md-4 align-items-center">
+                        <img src="https://via.placeholder.com/100" class="rounded-circle"
+                             alt="Placeholder foto profilo">
+                    </div>
+                    <div class="profile-info ml-3">
+                        <h4 class="card-title"><%= user.nome %> <%= user.cognome %></h4>
+                        <p class="card-text"><%= user.mail %></p>
+                        <p class="card-text">Borsellino: € <%= user.borsellino %></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Ricarica Borsellino
+                </div>
+                <div class="card-body">
+                    <form action="/profile/ricarica" method="POST">
+                        <div class="mb-3">
+                            <label for="importo" class="form-label">Importo:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">€</span>
+                                <input type="number" class="form-control" id="importo" name="importo" min="0.01"
+                                       step="0.01" required>
+                            </div>
+                        </div>
 
-	<table class="table">
-		<tbody>
-		<tr>
-			<th>Data di iscrizione:</th>
-			<td><%= user.insert_time.toLocaleDateString() %></td>
-		</tr>
-		<tr>
-			<th>Indirizzo:</th>
-			<td>
-				<% if (user.indirizzo) { %>
-					<%= user.indirizzo.indirizzo %>, <%= user.indirizzo.city %>, <%= user.indirizzo.provincia %> <%= user.indirizzo.cap %>
-				<% } else { %>
-					<p>Nessun indirizzo specificato</p>
-				<% } %>
-			</td>
-		</tr>
-		</tbody>
-	</table>
+                        <div class="mb-3">
+                            <label for="numeroCarta" class="form-label">Numero Carta:</label>
+                            <input type="text" class="form-control" id="numeroCarta" name="numeroCarta"
+                                   placeholder="XXXX XXXX XXXX XXXX" pattern="[0-9]{16}" required>
+                        </div>
 
-	<a href="/profile/edit" class="btn btn-primary">Modifica profilo</a>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="scadenza" class="form-label">Scadenza (MM/YY):</label>
+                                <input type="text" class="form-control" id="scadenza" name="scadenza"
+                                       placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cvv" class="form-label">CVV:</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="XXX"
+                                       pattern="[0-9]{3}" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="titolare" class="form-label">Titolare Carta:</label>
+                            <input type="text" class="form-control" id="titolare" name="titolare" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Ricarica</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="profileTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#carrello">Carrello</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#annunci">Annunci</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#venduti">Venduti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#acquistati">Acquistati</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="profileTabContent">
+                        <div class="tab-pane fade show active" id="carrello" role="tabpanel"
+                             aria-labelledby="carrello-tab">
+                            <div class="container">
+                                <div class="row">
+                                    <% carrello.forEach((product, index) => { %>
+                                        <a href="/product/<%= product.id %>" class="col-md-3 mb-4 text-decoration-none">
+                                            <div class="card product-card">
+                                                <div class="card-img-top text-center">
+                                                    <img src="<%= product.foto_info %>" alt="<%= product.nome %>"
+                                                         class="img-fluid product-image">
+                                                </div>
+                                                <div class="card-body d-flex flex-column justify-content-end">
+                                                    <h5 class="card-title text-center"><%= product.nome %></h5>
+                                                    <p class="card-text text-center price">€ <%= product.prezzo %></p>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <% if ((index + 1) % 4 === 0) { %>
+                                </div>
+                                <div class="row">
+                                    <% } %>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="annunci" role="tabpanel" aria-labelledby="annunci-tab">
+                            <div class="container">
+                                <div class="row">
+                                    <% listed.forEach((product, index) => { %>
+                                        <a href="/product/<%= product.id %>" class="col-md-3 mb-4 text-decoration-none">
+                                            <div class="card product-card">
+                                                <div class="card-img-top text-center">
+                                                    <img src="<%= product.foto_info %>" alt="<%= product.nome %>"
+                                                         class="img-fluid product-image">
+                                                </div>
+                                                <div class="card-body d-flex flex-column justify-content-end">
+                                                    <h5 class="card-title text-center"><%= product.nome %></h5>
+                                                    <p class="card-text text-center price">€ <%= product.prezzo %></p>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <% if ((index + 1) % 4 === 0) { %>
+                                </div>
+                                <div class="row">
+                                    <% } %>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="venduti" role="tabpanel" aria-labelledby="venduti-tab">
+                            <div class="container">
+                                <div class="row">
+                                    <% sold.forEach((product, index) => { %>
+                                        <a href="/product/<%= product.id %>" class="col-md-3 mb-4 text-decoration-none">
+                                            <div class="card product-card">
+                                                <div class="card-img-top text-center">
+                                                    <img src="<%= product.foto_info %>" alt="<%= product.nome %>"
+                                                         class="img-fluid product-image">
+                                                </div>
+                                                <div class="card-body d-flex flex-column justify-content-end">
+                                                    <h5 class="card-title text-center"><%= product.nome %></h5>
+                                                    <p class="card-text text-center price">€ <%= product.prezzo %></p>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <% if ((index + 1) % 4 === 0) { %>
+                                </div>
+                                <div class="row">
+                                    <% } %>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="acquistati" role="tabpanel" aria-labelledby="acquistati-tab">
+                            <div class="container">
+                                <div class="row">
+                                    <% acq.forEach((product, index) => { %>
+                                        <a href="/product/<%= product.id %>" class="col-md-3 mb-4 text-decoration-none">
+                                            <div class="card product-card">
+                                                <div class="card-img-top text-center">
+                                                    <img src="<%= product.foto_info %>" alt="<%= product.nome %>"
+                                                         class="img-fluid product-image">
+                                                </div>
+                                                <div class="card-body d-flex flex-column justify-content-end">
+                                                    <h5 class="card-title text-center"><%= product.nome %></h5>
+                                                    <p class="card-text text-center price">€ <%= product.prezzo %></p>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <% if ((index + 1) % 4 === 0) { %>
+                                </div>
+                                <div class="row">
+                                    <% } %>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', (event) => {
+		const tabLinks = document.querySelectorAll('.nav-link');
+		const tabPanes = document.querySelectorAll('.tab-pane');
+
+		tabLinks.forEach(link => {
+			link.addEventListener('click', (event) => {
+				event.preventDefault();
+
+				tabLinks.forEach(link => link.classList.remove('active'));
+
+				link.classList.add('active');
+
+				tabPanes.forEach(pane => pane.classList.remove('active', 'show'));
+
+				const targetTab = document.querySelector(link.getAttribute('href'));
+				targetTab.classList.add('active', 'show');
+			});
+		});
+	});
+
+
+	function renderTabContent(tabId, data) {
+		const tabPane = document.getElementById(tabId);
+		tabPane.innerHTML = '';
+
+		if (data.length > 0) {
+			data.forEach(item => {
+				const itemDiv = document.createElement('div');
+				itemDiv.classList.add('media', 'mt-25');
+				tabPane.appendChild(itemDiv);
+			});
+		} else {
+			tabPane.innerHTML = '<p>Nessun elemento trovato.</p>';
+		}
+	}
+
+</script>
+
+
+

@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/product.css" type="text/css">
 
     <% if (styles) { %>
         <% styles.forEach(function(style) { %>
@@ -49,55 +50,62 @@
                         <a href="/"><img src="/img/logo.png" alt="Logo"></a>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <a href="/" class="nav-element active">Home</a>
-                </div>
-                <div class="col-auto">
-                    <div class="menu-item">
-                        <a href="/categories" class=" nav-element">Shop</a>
-                        <div class="sub-menu">
-                            <% categorie.forEach(function(categoria) { %>
-                                <a href="/categoria/<%= categoria %>"><%= categoria %></a>
-                            <% }); %>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-auto">
+                            <a href="/" class="nav-element">Home</a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <a href="/vendi" class="nav-element">Vendi ora</a>
-                </div>
-                <div class="col-auto">
-                    <a href="/contact" class="nav-element">Contattaci</a>
-                </div>
-                <div class="col flex-grow-1"></div>
-                <% if (typeof userLog === 'undefined') { %>
-                    <div class="col-auto">
-                        <a href="/register" class="nav-element">Register</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="/login" class="nav-element">Sign in</a>
-                    </div>
-                <% } else { %>
-                    <div class="col-auto">
-                        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="/login/logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-auto">
-                        <div class="header-icons">
-                            <a href="/cart">
-                                <img src="/img/icons/cart-icon.png" alt="Cart">
-                            </a>
+                        <div class="col-auto">
+                            <div class="menu-item">
+                                <a href="/categories" class="nav-element">Shop</a>
+                                <div class="sub-menu">
+                                    <% categorie.forEach(function(categoria) { %>
+                                        <a href="/categoria/<%= categoria %>"><%= categoria %></a>
+                                    <% }); %>
+                                </div>
+                            </div>
                         </div>
+                        <div class="col-auto">
+                            <a href="/vendi" class="nav-element">Vendi ora</a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="/contact" class="nav-element">Contattaci</a>
+                        </div>
+                        <div class="col flex-grow-1"></div>
                     </div>
-                <% } %>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <% if (typeof userLog === 'undefined') { %>
+                            <div class="col-auto">
+                                <a href="/register" class="nav-element">Register</a>
+                            </div>
+                            <div class="col-auto">
+                                <a href="/login" class="nav-element">Sign in</a>
+                            </div>
+                        <% } else { %>
+                            <div class="col-auto">
+                                <div class="header-icons">
+                                    <a href="/cart">
+                                        <img src="/img/icons/cart-icon.png" alt="Cart">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="header-icons menu-item">
+                                    <a class="nav-item" href="/profilo" role="button">
+                                        <img src="/img/icons/profile-icon.png" alt="Profilo">
+                                    </a>
+                                    <div class="sub-menu">
+                                        <a href="/profile">Profilo</a>
+                                        <a href="/login/logout">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
 
+                        <% } %>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -173,18 +181,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2"></div>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/micioph/" class="instagram" target="_blank"><i
-                                    class="fa fa-instagram"></i><span>instagram</span></a>
-                        <a href="https://www.instagram.com/micioph/" class="facebook" target="_blank"><i
-                                    class="fa fa-facebook"></i><span>facebook</span></a>
-                        <a href="https://www.instagram.com/micioph/" class="youtube" target="_blank"><i
-                                    class="fa fa-youtube"></i><span>youtube</span></a>
+                    <div class="col-md-8 d-flex justify-content-center">
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/micioph/" class="instagram" target="_blank"><i
+                                        class="fa fa-instagram"></i><span>instagram</span></a>
+                            <a href="https://www.instagram.com/micioph/" class="facebook" target="_blank"><i
+                                        class="fa fa-facebook"></i><span>facebook</span></a>
+                            <a href="https://www.instagram.com/micioph/" class="youtube" target="_blank"><i
+                                        class="fa fa-youtube"></i><span>youtube</span></a>
+                        </div>
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-3"></div>
                 </div>
             </div>
         </div>
+
     </footer>
 
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -198,6 +209,7 @@
     <script src="js/menu.js"></script>
     <script src="js/button.js"></script>
     <script src="js/slider.js"></script>
+
     <% if (scripts) { %>
         <% scripts.forEach(function(script) { %>
             <script src="<%= script %>"></script>
