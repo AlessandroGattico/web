@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d9485da-8b87-4e3c-9ac8-942b21915b8f" name="Changes" comment="fare video e consegnare">
+    <list default="true" id="5d9485da-8b87-4e3c-9ac8-942b21915b8f" name="Changes" comment="consegnare">
+      <change afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database" beforeDir="false" afterPath="$PROJECT_DIR$/database" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/layout.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/layout.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/layoutAdmin.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/layoutAdmin.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pages/categoria.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/categoria.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pages/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pages/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/login.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pages/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/register.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pages/search.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pages/search.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +142,7 @@
       <workItem from="1718796119858" duration="18273000" />
       <workItem from="1718821993158" duration="8588000" />
       <workItem from="1718862122405" duration="18959000" />
-      <workItem from="1718888472773" duration="4033000" />
+      <workItem from="1718888472773" duration="4788000" />
     </task>
     <task id="LOCAL-00001" summary="sistemare login">
       <option name="closed" value="true" />
@@ -195,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718880412537</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="consegnare">
+      <option name="closed" value="true" />
+      <created>1718892584799</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1718892584799</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +204,8 @@
     <MESSAGE value="da sistemare foto" />
     <MESSAGE value="ora funziona" />
     <MESSAGE value="fare video e consegnare" />
-    <option name="LAST_COMMIT_MESSAGE" value="fare video e consegnare" />
+    <MESSAGE value="consegnare" />
+    <option name="LAST_COMMIT_MESSAGE" value="consegnare" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
