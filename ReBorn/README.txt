@@ -1,3 +1,12 @@
+CARTELLA PROGETTO:
+https://drive.google.com/drive/folders/1rQa7RTeNEoJAKbe6k7XKbMrq-9Ce6tBv?usp=drive_link
+
+INSERIMENTO DATABASE IN PROGETTO:
+Il database va inserito nella cartella ReBorn, cartella principale del progetto
+
+VIDEO:
+https://youtu.be/B5dIf4lkSmc
+
 utenti:
 ADMIN
 Email: admin@admin.com
@@ -20,6 +29,8 @@ prima di avviare il tutto installare i moduli tramite npm install
 se necessario eseguire npm audit fix --force
 
 una volta preparato l'ambiente avviare digitando npm start
+
+L'applicazione si avvierà sulla porta 3000 -> recarsi a http://localhost:3000/
 
 selezionando tra le varie pagine del sito avremo a disposizione le varie operazione a seconda del tipo di utente
 

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d9485da-8b87-4e3c-9ac8-942b21915b8f" name="Changes" comment="consegnare">
-      <change afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
+    <list default="true" id="5d9485da-8b87-4e3c-9ac8-942b21915b8f" name="Changes" comment="inserire video">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database" beforeDir="false" afterPath="$PROJECT_DIR$/database" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +143,9 @@
       <workItem from="1718796119858" duration="18273000" />
       <workItem from="1718821993158" duration="8588000" />
       <workItem from="1718862122405" duration="18959000" />
-      <workItem from="1718888472773" duration="4788000" />
+      <workItem from="1718888472773" duration="7744000" />
+      <workItem from="1719390741789" duration="58000" />
+      <workItem from="1719390833864" duration="604000" />
     </task>
     <task id="LOCAL-00001" summary="sistemare login">
       <option name="closed" value="true" />
@@ -192,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718892584799</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="inserire video">
+      <option name="closed" value="true" />
+      <created>1718894153244</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718894153244</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +216,8 @@
     <MESSAGE value="ora funziona" />
     <MESSAGE value="fare video e consegnare" />
     <MESSAGE value="consegnare" />
-    <option name="LAST_COMMIT_MESSAGE" value="consegnare" />
+    <MESSAGE value="inserire video" />
+    <option name="LAST_COMMIT_MESSAGE" value="inserire video" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
