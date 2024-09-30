@@ -4,13 +4,13 @@ Email: admin@admin.com
 Password: adminadmin
 
 UTENTI
-Email: gattico.alessandro@gmail.com
+Email: ale123@gmail.com
 Password: Alessandro
 
 Email: pagliari2024@gmail.com
 Password: pagliapaglia
 
-Email: benny.giarda@gmail.com
+Email: benny123@gmail.com
 Password: bennybenny
 
 
