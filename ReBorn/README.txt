@@ -1,12 +1,3 @@
-CARTELLA PROGETTO:
-https://drive.google.com/drive/folders/1rQa7RTeNEoJAKbe6k7XKbMrq-9Ce6tBv?usp=drive_link
-
-INSERIMENTO DATABASE IN PROGETTO:
-Il database va inserito nella cartella ReBorn, cartella principale del progetto
-
-VIDEO:
-https://youtu.be/B5dIf4lkSmc
-
 utenti:
 ADMIN
 Email: admin@admin.com
